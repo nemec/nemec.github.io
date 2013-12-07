@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Nemec.github.io : My Github Blog" />
+    <meta name="description" content="Quick Development Web Server With LINQPad and WebApi Attribute Routing : Rapidly prototype an HTTP client application by defining server responses to complex requests." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Nemec.github.io</title>
+    <title>Quick Development Web Server With LINQPad and WebApi Attribute Routing</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/nemec">View on GitHub</a>
 
-          <h1 id="project_title">Nemec.github.io</h1>
-          <h2 id="project_tagline">My Github Blog</h2>
+          <h1 id="project_title">Quick Development Web Server With LINQPad and WebApi Attribute Routing</h1>
+          <h2 id="project_tagline">Rapidly prototype an HTTP client application by defining server responses to complex requests.</h2>
 
         </header>
     </div>
@@ -27,37 +27,145 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <p>When writing an HTTP client application, you often need to test unusual server responses that, while in a known format, require you to twist some knobs to force a strange response. Maybe it requires you to register an account on the server and submit various content requests, all of which may take some time if the server you're using requires explicit approval or is processed every X hours. Instead, let's serve up canned responses to the requests you'll be generating!</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>My first instinct would be to create a folder representing the path you want, drop some html/json/xml files in, and power up Python's <a href="http://www.linuxjournal.com/content/tech-tip-really-simple-http-server-python">SimpleHTTPServer</a> then point your app to <code>http://localhost:8080</code> instead of your normal development server. While this works for simple cases, there are three major downsides to this approach:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<ol>
+<li>Static pages only. If you want to test a range of URLs that fit a pattern or debug/validate the query string sent by your application, it's not simple to do without creating tons of duplicate files or trawling through the console log for the request URL.</li>
+<li>Complex URLs are a pain. To check "<a href="http://someserver.com/some/complex/path/20283">http://someserver.com/some/complex/path/20283</a>" you need to create a nested directory structure and an index.html just for a single request.</li>
+<li>Only responds to GET requests. This complaint is specific to <code>SimpleHTTPServer</code>: other servers may respond to any HTTP verb, but it's rare that any API-consuming application is limited to just GET requests.</li>
+</ol><p>To overcome these hurdles, we can turn to the fantastic .Net scratchpad <a href="http://www.linqpad.net/">LINQPad</a>. It's a free program that lets you execute C#/VB statements and make requests to SQL servers, LINQ-to-SQL style. In addition, we'll load up with self-hosted ASP.Net WebApi and Attribute Routing to give us almost infinite flexibility in how we define our responses.</p>
+
+<p>Once you have LINQPad installed and open, we need to set up our dependencies. I have the Premium version which comes with NuGet integration, but the required DLLs can be downloaded elsewhere and referenced explicitly if you're using the free version. Now press F4 and add the following references:</p>
+
+<ul>
+<li>Microsoft.AspNet.WebApi.OwinSelfHost</li>
+<li>AttributeRouting.WebApi.Hosted</li>
+<li>System.Net.Http.dll</li>
+<li>System.Windows.Forms.dll (if you want a quick "stop server" button)</li>
+</ul><p>And the following namespace imports:</p>
+
+<ul>
+<li>AttributeRouting</li>
+<li>Microsoft.Owin.Hosting</li>
+<li>Owin</li>
+<li>System.Net.Http</li>
+<li>System.Web.Http</li>
+<li>System.Web.Http.Dispatcher</li>
+<li>System.Web.Http.SelfHost</li>
+<li>System.Windows.Forms</li>
+<li>System.Net</li>
+</ul><p>Now change your snippet's Language to <code>C# Program</code>, which will allow us to define our own methods and classes to setup WebApi. </p>
+
+<p>First bit of code you can straight copy-paste into the panel. Since LINQPad generates your defined classes nested within its own UserQuery class, WebApi's default ControllerTypeResolver cannot find our controller. This class will reset the resolver so that it can find our code. Major thanks to <a href="http://www.strathweb.com/2013/04/hosting-asp-net-web-api-in-linqpad/">StrathWeb</a> for the tip.</p>
+
+<pre><code>public class ControllerResolver : DefaultHttpControllerTypeResolver 
+{
+    public override ICollection&lt;Type&gt; GetControllerTypes(IAssembliesResolver assembliesResolver) 
+    {
+        var types = Assembly.GetExecutingAssembly().GetExportedTypes();
+        return types.Where(i =&gt; typeof(System.Web.Http.Controllers.IHttpController).IsAssignableFrom(i)).ToList();          
+    }
+}
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Now, we can define a "startup" class responsible for configuring WebApi. Note that we replace the original controller resolver here and map our (future) attribute routes here.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<pre><code>public class Startup
+{
+    public void Configuration(IAppBuilder appBuilder)
+    {
+        var config = new HttpConfiguration();
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+        // LINQPad generates nested classes, not
+        // detectable by default resolver.
+        config.Services.Replace(
+            typeof(IHttpControllerTypeResolver), 
+            new ControllerResolver());
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+        config.MapHttpAttributeRoutes();
+        appBuilder.UseWebApi(config);
+    }
+}
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Here's our <code>Main</code> function which will be responsible for starting and tearing down our self-hosted server. One really neat feature of LINQPad is that it doesn't necessarily tear down your process once the script is done. You can <a href="http://www.linqpad.net/customvisualizers.aspx">inject UI controls</a> into the output panel to allow interactive execution of your scripts. We'll be using a Button to give us control over when our web server shuts down.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<pre><code>void Main()
+{
+    var baseAddress = "http://localhost:8080";
+    var app = WebApp.Start&lt;Startup&gt;(baseAddress);
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+    var button = new Button { Text = "Click to stop server." };
+    var panel= PanelManager.DisplayControl(button, "Webserver");
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+    button.Click += (o, e) =&gt;
+    {
+        app.Dispose();
+        panel.Close();
+    };
+}
+</code></pre>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Now for the meat of the script, our <strong>ApiController!</strong> Let's say, for example, that we are making two HTTP calls:</p>
+
+<ul>
+<li>One POST request to <code>/some/complex/path/123?cc=no</code> where <code>123</code> is variable and the <code>cc</code> value tells us that our country is Norway. It will return a basic static HTML file.</li>
+<li>A GET request to <code>/some/other/path</code> that will return a <code>500</code> error simulating catastrophic failure on the server.</li>
+</ul><p>Under normal WebApi, these nested paths would probably require some complex route configuration, but with the new Attribute Routing it's all handled automagically based on the route we define for our Action method. Here's what our controller will look like:</p>
+
+<pre><code>public class MainController : ApiController
+{
+    [Route("some/complex/path/{id}")]
+    // WebApi parameter binding will turn {id} in the path into an argument and
+    // pull 'lc' and 'cc' from the query string (with default values) automatically.
+    public HttpResponseMessage Post(string id, string lc = "en", string cc = "us")
+    {
+        // Print some debug data during the request.
+        // Will appear in Results panel.
+        (lc + "-" + cc).Dump();
+        return StaticFile("c:/users/dan/somedoc.html");
+    }
+
+    [Route("some/other/path")]
+    // Note that, using WebApi, defining the HTTP Verb used for a particular
+    // action is based on the name of the method.
+    public string Get()
+    {
+        throw new HttpResponseException(HttpStatusCode.InternalServerError);
+    }
+}
+</code></pre>
+
+<p>To finish things up here's the implementation of <code>StaticFile</code>, a method that reads a file from disk and returns it as HTML:</p>
+
+<pre><code>private static HttpResponseMessage StaticFile(string localFilename, string contentType = "text/html")
+{
+    if(File.Exists(localFilename))
+    {
+        return new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(
+                    File.ReadAllText(localFilename),
+                Encoding.UTF8, contentType)
+        };
+    }
+    else
+    {
+        return new HttpResponseMessage(HttpStatusCode.NotFound)
+        {
+            Content = new StringContent("File " + localFilename + " does not exist.")
+        };
+    }
+}
+</code></pre>
+
+<p>Now click the Run button and try it out! Take a look at the nice, big button that you can click when you're ready to turn off the web server:</p>
+
+<p><img src="http://i.imgur.com/4iuTuVt.png" alt="Stop Button"></p>
+
+<p>You can save this whole snippet as a Query or a Sample and modify the Controller to return whatever data your heart desires next time you need it for testing.</p>
       </section>
     </div>
 
