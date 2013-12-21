@@ -26,23 +26,26 @@ My first instinct would be to create a folder representing the path you want, dr
 Dependencies
 ------------
 
-Once you have LINQPad installed and open, we need to set up our dependencies. I have the Premium version which comes with NuGet integration, but the required DLLs can be downloaded elsewhere and referenced explicitly if you're using the free version. Now press F4 and add the following references:
+Once you have LINQPad installed and open, we need to set up our dependencies. I have the Premium version which comes with NuGet integration, but the required DLLs can be downloaded elsewhere and referenced explicitly if you're using the free version.
+
+Now press F4 and add the following references:
 
 * Microsoft.AspNet.WebApi.OwinSelfHost
 * AttributeRouting.WebApi.Hosted
 * System.Net.Http.dll
 * System.Windows.Forms.dll (if you want a quick "stop server" button)
-* And the following namespace imports:
-  * AttributeRouting
-  * Microsoft.Owin.Hosting
-  * Owin
-  * System.Net.Http
-  * System.Web.Http
-  * System.Web.Http.Controllers
-  * System.Web.Http.Dispatcher
-  * System.Web.Http.SelfHost
-  * System.Windows.Forms
-  * System.Net
+
+And the following namespace imports:
+* AttributeRouting
+* Microsoft.Owin.Hosting
+* Owin
+* System.Net.Http
+* System.Web.Http
+* System.Web.Http.Controllers
+* System.Web.Http.Dispatcher
+* System.Web.Http.SelfHost
+* System.Windows.Forms
+* System.Net
   
 Setup
 -----
