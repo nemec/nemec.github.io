@@ -1,4 +1,7 @@
-name: Your New Jekyll Site
+name: Dan's Blog
+description: Code 'n Stuff
+url: http://blog.nem.ec/
+
 markdown: redcarpet
 pygments: true
 permalink: /:year/:month/:day/:title
