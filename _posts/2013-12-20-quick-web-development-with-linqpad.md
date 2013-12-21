@@ -23,6 +23,9 @@ My first instinct would be to create a folder representing the path you want, dr
 * Only responds to GET requests. This complaint is specific to `SimpleHTTPServer`: other servers may respond to any HTTP verb, but it's rare that any API-consuming application is limited to just GET requests.
 * To overcome these hurdles, we can turn to the fantastic .Net scratchpad [LINQPad](http://www.linqpad.net/). It's a free program that lets you execute C#/VB statements and make requests to SQL servers, LINQ-to-SQL style. In addition, we'll load up with self-hosted ASP.Net WebApi and Attribute Routing to give us almost infinite flexibility in how we define our responses.
 
+Dependencies
+------------
+
 Once you have LINQPad installed and open, we need to set up our dependencies. I have the Premium version which comes with NuGet integration, but the required DLLs can be downloaded elsewhere and referenced explicitly if you're using the free version. Now press F4 and add the following references:
 
 * Microsoft.AspNet.WebApi.OwinSelfHost
@@ -40,55 +43,67 @@ Once you have LINQPad installed and open, we need to set up our dependencies. I 
   * System.Web.Http.SelfHost
   * System.Windows.Forms
   * System.Net
-
+  
+Setup
+-----
+  
 Now change your snippet's Language to `C# Program`, which will allow us to define our own methods and classes to setup WebApi.
 
 First bit of code you can straight copy-paste into the panel. Since LINQPad generates your defined classes nested within its own UserQuery class, WebApi's default ControllerTypeResolver cannot find our controller. This class will reset the resolver so that it can find our code. Major thanks to [StrathWeb](http://www.strathweb.com/2013/04/hosting-asp-net-web-api-in-linqpad/) for the tip.
 
-    public class ControllerResolver : DefaultHttpControllerTypeResolver 
-    {
-        public override ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver) 
-        {
-            var types = Assembly.GetExecutingAssembly().GetExportedTypes();
-            return types.Where(i => typeof(IHttpController).IsAssignableFrom(i)).ToList();          
-        }
-    }
-
+```csharp
+public class ControllerResolver : DefaultHttpControllerTypeResolver 
+{
+	public override ICollection<Type> GetControllerTypes(IAssembliesResolver assembliesResolver) 
+	{
+		var types = Assembly.GetExecutingAssembly().GetExportedTypes();
+		return types.Where(i => typeof(IHttpController).IsAssignableFrom(i)).ToList();          
+	}
+}
+```
+	
 Now, we can define a "startup" class responsible for configuring WebApi. Note that we replace the original controller resolver here and map our (future) attribute routes here.
 
-    public class Startup
-    {
-        public void Configuration(IAppBuilder appBuilder)
-        {
-            var config = new HttpConfiguration();
+```csharp
+public class Startup
+{
+	public void Configuration(IAppBuilder appBuilder)
+	{
+		var config = new HttpConfiguration();
 
-            // LINQPad generates nested classes, not
-            // detectable by default resolver.
-            config.Services.Replace(
-                typeof(IHttpControllerTypeResolver), 
-                new ControllerResolver());
+		// LINQPad generates nested classes, not
+		// detectable by default resolver.
+		config.Services.Replace(
+			typeof(IHttpControllerTypeResolver), 
+			new ControllerResolver());
 
-            config.MapHttpAttributeRoutes();
-            appBuilder.UseWebApi(config);
-        }
-    }
-
+		config.MapHttpAttributeRoutes();
+		appBuilder.UseWebApi(config);
+	}
+}
+```
+	
 Here's our `Main` function which will be responsible for starting and tearing down our self-hosted server. One really neat feature of LINQPad is that it doesn't necessarily tear down your process once the script is done. You can [inject UI controls](http://www.linqpad.net/customvisualizers.aspx) into the output panel to allow interactive execution of your scripts. We'll be using a Button to give us control over when our web server shuts down.
 
-    void Main()
-    {
-        var baseAddress = "http://localhost:8080";
-        var app = WebApp.Start&lt;Startup&gt;(baseAddress);
+```csharp
+void Main()
+{
+	var baseAddress = "http://localhost:8080";
+	var app = WebApp.Start&lt;Startup&gt;(baseAddress);
 
-        var button = new Button { Text = "Click to stop server." };
-        var panel= PanelManager.DisplayControl(button, "Webserver");
+	var button = new Button { Text = "Click to stop server." };
+	var panel= PanelManager.DisplayControl(button, "Webserver");
 
-        button.Click += (o, e) =&gt;
-        {
-            app.Dispose();
-            panel.Close();
-        };
-    }
+	button.Click += (o, e) =&gt;
+	{
+		app.Dispose();
+		panel.Close();
+	};
+}
+```
+
+The Fun
+-------
 
 Now for the meat of the script, our **ApiController!** Let's say, for example, that we are making two HTTP calls:
 
@@ -97,53 +112,117 @@ Now for the meat of the script, our **ApiController!** Let's say, for example, t
 
 Under normal WebApi, these nested paths would probably require some complex route configuration, but with the new Attribute Routing it's all handled automagically based on the route we define for our Action method. Here's what our controller will look like:
 
-    public class MainController : ApiController
-    {
-        [Route("some/complex/path/{id}")]
-        // WebApi parameter binding will turn {id} in the path into an argument and
-        // pull 'lc' and 'cc' from the query string (with default values) automatically.
-        public HttpResponseMessage Post(string id, string lc = "en", string cc = "us")
-        {
-            // Print some debug data during the request.
-            // Will appear in Results panel.
-            (lc + "-" + cc).Dump();
-            return StaticFile("c:/users/dan/somedoc.html");
-        }
+```csharp
+public class MainController : ApiController
+{
+	[Route("some/complex/path/{id}")]
+	// WebApi parameter binding will turn {id} in the path into an argument and
+	// pull 'lc' and 'cc' from the query string (with default values) automatically.
+	public HttpResponseMessage Post(string id, string lc = "en", string cc = "us")
+	{
+		// Print some debug data during the request.
+		// Will appear in Results panel.
+		(lc + "-" + cc).Dump();
+		return StaticFile("c:/users/dan/somedoc.html");
+	}
 
-        [Route("some/other/path")]
-        // Note that, using WebApi, defining the HTTP Verb used for a particular
-        // action is based on the name of the method.
-        public string Get()
-        {
-            throw new HttpResponseException(HttpStatusCode.InternalServerError);
-        }
-    }
+	[Route("some/other/path")]
+	// Note that, using WebApi, defining the HTTP Verb used for a particular
+	// action is based on the name of the method.
+	public string Get()
+	{
+		throw new HttpResponseException(HttpStatusCode.InternalServerError);
+	}
+}
+```
 
 To finish things up here's the implementation of `StaticFile`, a method that reads a file from disk and returns it as HTML:
 
-    private static HttpResponseMessage StaticFile(
-	    string localFilename, string contentType = "text/html")
-    {
-        if(File.Exists(localFilename))
-        {
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(
-                        File.ReadAllText(localFilename),
-                    Encoding.UTF8, contentType)
-            };
-        }
-        else
-        {
-            return new HttpResponseMessage(HttpStatusCode.NotFound)
-            {
-                Content = new StringContent("File " + localFilename + " does not exist.")
-            };
-        }
-    }
+```csharp
+private static HttpResponseMessage StaticFile(
+	string localFilename, string contentType = "text/html")
+{
+	if(File.Exists(localFilename))
+	{
+		return new HttpResponseMessage(HttpStatusCode.OK)
+		{
+			Content = new StringContent(
+					File.ReadAllText(localFilename),
+				Encoding.UTF8, contentType)
+		};
+	}
+	else
+	{
+		return new HttpResponseMessage(HttpStatusCode.NotFound)
+		{
+			Content = new StringContent("File " + localFilename + " does not exist.")
+		};
+	}
+}
+```
 
 Now click the Run button and try it out! Take a look at the nice, big button that you can click when you're ready to turn off the web server:
 
 ![Stop Button](http://i.imgur.com/4iuTuVt.png)
 
 You can save this whole snippet as a Query or a Sample and modify the Controller to return whatever data your heart desires next time you need it for testing.
+
+Bonus: Iterator blocks
+-----
+
+Now, in the course of making requests, you might need to perform some "state change" between requests to a single route so that your first request returns one value and the second returns a different once (to reflect outside database updates or some similar situation). Instead of messing around with static fields (remember, `ApiController` instances are per-request) and state machines, let a couple of helper methods do it for you! Here's a sample method that will return three different values:
+
+```csharp
+private static IEnumerable<string> PrivMultipleRequests()
+{
+	yield return "first";
+	yield return "second";
+	yield return "third";
+}
+```
+
+And the route? Here's where the magic comes in:
+
+```csharp
+[Route("multi/reqs")]
+public string GetMultipleRequests()
+{
+	return Multiple<string>.Next(PrivMultipleRequests);
+}
+```
+
+The static `Multiple` class caches your first call to `Next` from the `GetMultipleRequests` method and makes sure the Enumerator is advanced with each call. If you try to make a fourth GET request to `/multi/reqs` an exception will be thrown (although you could always add an infinite loop of some sort at the end of your iterator block if you want to return a default value instead). Here's how `Multiple` works:
+
+```csharp
+private static class Multiple<T>
+{
+    private static Dictionary<string, IEnumerator<T>> _iters = new Dictionary<string, IEnumerator<T>>();
+    
+    public static T Next(Func<IEnumerable<T>> init, string uniqueKey = null)
+    {
+        var callingMethod = new StackTrace().GetFrame(1).GetMethod();
+        if(uniqueKey == null)
+        {
+            // Magic to uniquely identify a specific method called from a specific function.
+            // This way, you can pass the same delegate in from different routes and get
+            // a new enumerator each time.
+            uniqueKey = callingMethod.DeclaringType.FullName + "." + 
+                        callingMethod.Name;
+        }
+        var key = uniqueKey + ":" +
+                  init.Method.DeclaringType + "." +
+                  init.Method.Name;
+        IEnumerator<T> enm;
+        if(!_iters.TryGetValue(key, out enm))
+        {
+            _iters[key] = enm = init().GetEnumerator();
+        }
+        if(enm.MoveNext())
+        {
+            return enm.Current;
+        }
+        throw new InvalidOperationException(String.Format(
+            "Too many calls to resource {0} from {1}", init.Method.Name, callingMethod.DeclaringType));
+    }
+}
+```

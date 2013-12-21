@@ -19,10 +19,14 @@ body {
   text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-size: 100%; }
+.title {
+  font-size: 100%;
+}
 
-h1 { margin-bottom: 1em; }
+h1 {
+  margin-bottom: 1em;
+  line-height: normal;
+}
 p { margin: 1em 0; }
 
 a         { color: #00a; }
@@ -128,6 +132,9 @@ a:visited { color: #a0a; }
 /*****************************************************************************/
 
 /* standard */
+.post h2 {
+  margin-top: 0.5em;
+}
 .post pre {
   border: 1px solid #ddd;
   background-color: #eef;
