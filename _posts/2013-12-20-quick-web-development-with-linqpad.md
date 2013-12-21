@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Quick Development Web Server With LINQPad and WebApi Attribute Routing
-description: 
 tags:
   - dotnet
   - csharp
