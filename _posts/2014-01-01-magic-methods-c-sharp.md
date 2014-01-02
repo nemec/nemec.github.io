@@ -182,7 +182,7 @@ await Anything
 
 `await` support is triggered by a method on an object (or an extension method)
 called `GetAwaiter`. That returned object needs to implement
-`System.Runtime.CompilerServices.INotifyCompletion` as well as define a boolean
+`INotifyCompletion` as well as define a boolean
 `IsCompleted` property plus a `GetResult` method that determines the "awaited"
 return type.
 
