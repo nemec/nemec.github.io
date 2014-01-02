@@ -21,7 +21,7 @@ most of the features, a developer might never have to implement any of the
 methods herself, but they're still an interesting look into the depths of C#.
 
 Foreach Loop
-============
+------------
 
 What's so special about the `foreach` loop, anyway? Isn't it just a thing you
 call with an `IEnumerable`? Close, but not quite. The compiler actually takes
@@ -74,7 +74,7 @@ public class Iterator
 ```
 
 Collection Initializers
-=======================
+-----------------------
 
 You've probably already seen these in action on existing collections, but
 there is nothing stopping you from implementing this feature on your own
@@ -135,7 +135,7 @@ default parameters!), commonly seen when initializing Dictionaries
 [Further Reading](http://msdn.microsoft.com/en-us/library/vstudio/bb384062.aspx)
 
 LINQ Query Expressions
-======================
+----------------------
 
 That SQL-like syntax that debuted alongside LINQ works exactly like you'd
 expect: it's transformed into the method syntax (`.Where().Select()` etc.)
@@ -178,7 +178,7 @@ public static class MyExtensions
 [Further Reading](http://msmvps.com/blogs/jon_skeet/archive/2010/09/03/reimplementing-linq-to-objects-part-2-quot-where-quot.aspx)
 
 await Anything
-==============
+--------------
 
 `await` support is triggered by a method on an object (or an extension method)
 called `GetAwaiter`. That returned object needs to implement
