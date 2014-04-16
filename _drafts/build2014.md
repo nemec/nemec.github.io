@@ -93,10 +93,11 @@ New Portal
 ----------
 
 Azure has a new, beautiful web portal in preview. I cannot find any screenshots
-online, but 
-
-- Blades, dig deep
-- horizontal scrolling
+online, but it contains a customizable dashboard with the ability to drill down
+into more detail. In true modern Windows fashion, drilling down opens up a
+vertical pane containing the requested information off to the right of the
+dashboard, requiring you to scroll horizontally to inspect the details and
+potentially drill down even further.
 
 [Azure Service Bus](http://channel9.msdn.com/Events/Build/2014/3-635)
 -----------------
