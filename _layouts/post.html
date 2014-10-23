@@ -27,18 +27,50 @@ layout: default
 </div>
 
 <style type="text/css">
+	a.tooltip {outline:none; }
+	a.tooltip strong {line-height:30px;}
+	a.tooltip:hover {text-decoration:none;} 
+	a.tooltip span {
+		z-index:10;display:none; padding:14px 20px;
+		margin-top:-30px; margin-left:28px;
+		width:300px; line-height:16px;
+	}
+	a.tooltip:hover span{
+		display:inline; position:absolute; color:#111;
+		border:1px solid #DCA; background:#fffAF0;}
+		
+	/*CSS3 extras*/
+	a.tooltip span
+	{
+		border-radius:4px;
+		box-shadow: 5px 5px 8px #CCC;
+	}
+
 	#disqus_thread.unclicked {
 		background-color: #944337;
 		font-weight: bold;
-		font-color: white;
+		color: white;
+		height: 50px;
 	}
 	
 	#disqus_thread {
+		margin-top 10px;
 		width: 100%;
 	}
 </style>
 
-<div id="disqus_thread" class="comments unclicked">Click to display comments.</div>
+<div id="disqus_thread" class="comments unclicked">
+	<span>Click to display comments.</span>
+	<a href="#" class="tooltip">
+		Why?
+		<span>
+			Many hosted comment systems use their reach to track users as they browse,
+			similar to how Facebook like buttons can see when you load a page that
+			embeds the button. That information is used to feed you targeted ads (among
+			other things). Disqus will not be contacted until you open the comments.
+		</span>
+	</a>
+</div>
 <script type="text/javascript">
 	var disqus_shortname = 'nemec'; // required: replace example with your forum shortname
 	var disqus_identifier = '{{ page.url }}';
