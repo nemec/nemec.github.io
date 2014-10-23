@@ -27,7 +27,16 @@ layout: default
 </div>
 
 <style type="text/css">
-	a.tooltip {outline:none; }
+	a.tooltip {
+		text-decoration: none;
+		border-bottom: 1px dotted white;
+		outline:none;
+		font-weight: normal;
+	}
+	a.tooltop .text {
+		color: white;
+		font-size: smaller;
+	}
 	a.tooltip strong {line-height:30px;}
 	a.tooltip:hover {text-decoration:none;} 
 	a.tooltip span {
@@ -62,7 +71,7 @@ layout: default
 <div id="disqus_thread" class="comments unclicked">
 	<span>Click to display comments.</span>
 	<a href="#" class="tooltip">
-		Why?
+		<span class="text">Why?</span>
 		<span>
 			Many hosted comment systems use their reach to track users as they browse,
 			similar to how Facebook like buttons can see when you load a page that
