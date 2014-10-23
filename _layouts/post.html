@@ -36,6 +36,7 @@ layout: default
 	a.tooltip .text {
 		color: white;
 		font-size: smaller;
+		cursor: default;
 	}
 	a.tooltip strong {line-height:30px;}
 	a.tooltip:hover {text-decoration:none;} 
@@ -70,7 +71,7 @@ layout: default
 
 <div id="disqus_thread" class="comments unclicked">
 	<span>Click to display comments.</span>
-	<a href="#" class="tooltip">
+	<a onclick="return false" class="tooltip">
 		<span class="text">Why?</span>
 		<span class="popup">
 			Many hosted comment systems use their reach to track users as they browse,
