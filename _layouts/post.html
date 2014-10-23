@@ -39,17 +39,17 @@ layout: default
 	}
 	a.tooltip strong {line-height:30px;}
 	a.tooltip:hover {text-decoration:none;} 
-	a.tooltip span {
+	a.tooltip .popup {
 		z-index:10;display:none; padding:14px 20px;
 		margin-top:-30px; margin-left:28px;
 		width:300px; line-height:16px;
 	}
-	a.tooltip:hover span{
+	a.tooltip:hover .popup{
 		display:inline; position:absolute; color:#111;
 		border:1px solid #DCA; background:#fffAF0;}
 		
 	/*CSS3 extras*/
-	a.tooltip span
+	a.tooltip .popup
 	{
 		border-radius:4px;
 		box-shadow: 5px 5px 8px #CCC;
@@ -72,7 +72,7 @@ layout: default
 	<span>Click to display comments.</span>
 	<a href="#" class="tooltip">
 		<span class="text">Why?</span>
-		<span>
+		<span class="popup">
 			Many hosted comment systems use their reach to track users as they browse,
 			similar to how Facebook like buttons can see when you load a page that
 			embeds the button. That information is used to feed you targeted ads (among
