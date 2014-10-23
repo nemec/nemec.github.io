@@ -20,26 +20,38 @@ layout: default
   </script>
   
   <script type="text/javascript">
-    console.log("{{page.title}}");
       reddit_url = "http://blog.nem.ec{{ page.url }}";
       reddit_title = "{{ page.title }}";
   </script>
   <script type="text/javascript" src="http://www.reddit.com/buttonlite.js?i=5"></script>
 </div>
 
-<div id="disqus_thread" class="comments"></div>
+<style type="text/css">
+	#disqus_thread {
+		background-color: #944337;
+		width: 100%;
+	}
+</style>
+
+<div id="disqus_thread" class="comments">Click to display comments.</div>
 <script type="text/javascript">
-/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 	var disqus_shortname = 'nemec'; // required: replace example with your forum shortname
 	var disqus_identifier = '{{ page.url }}';
     var disqus_url = 'http://blog.nem.ec{{ page.url }}';
 
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function() {
-  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
+	function enableDisqus() {
+	  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}
+	
+	var thread = document.getElementById("disqus_thread");
+	if(thread.attachEvent) {
+		thread.attachEvent("onclick", enableDisqus);
+	}
+	else {
+		thread.addEventListener("click", enableDisqus, false);
+	}
 </script>
 <noscript>JavaScript is required to view comments from the Disqus platform.</a></noscript>
 
