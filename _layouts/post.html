@@ -27,25 +27,34 @@ layout: default
 </div>
 
 <style type="text/css">
-	#disqus_thread {
+	#disqus_thread .unclicked {
 		background-color: #944337;
+		font-weight: bold;
+		font-color: white;
+	}
+	
+	#disqus_thread {
 		width: 100%;
 	}
 </style>
 
-<div id="disqus_thread" class="comments">Click to display comments.</div>
+<div id="disqus_thread" class="comments unclicked">Click to display comments.</div>
 <script type="text/javascript">
 	var disqus_shortname = 'nemec'; // required: replace example with your forum shortname
 	var disqus_identifier = '{{ page.url }}';
     var disqus_url = 'http://blog.nem.ec{{ page.url }}';
-
-	function enableDisqus() {
-	  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	}
 	
 	var thread = document.getElementById("disqus_thread");
+
+	function enableDisqus() {
+		thread.classList.remove("unclicked");
+		thread.innerHTML = "";
+	
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}
+	
 	if(thread.attachEvent) {
 		thread.attachEvent("onclick", enableDisqus);
 	}
