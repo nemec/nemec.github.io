@@ -1,10 +1,10 @@
 name: Dan's Blog
 description: Code 'n Stuff
-url: http://blog.nem.ec/
+url: http://blog.nem.ec
 
 markdown: redcarpet
 pygments: true
-permalink: :year/:month/:day/:title
+permalink: /:year/:month/:day/:title
 
 gems:
   - jekyll-sitemap
