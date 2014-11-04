@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Practical Design Patterns
+description: Practical design patterns
 tags:
   - dotnet
   - csharp

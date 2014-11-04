@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tips for bulk inserts in Entity Framework
+description: Bulk insers in Entity Framework
 tags:
   - dotnet
   - csharp

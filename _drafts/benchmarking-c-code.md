@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Benchmarking C# Code
+title: File upload limits in WebAPI
+description: Configuring a limit on the amount of content consumed by an API controller
 tags:
   - dotnet
   - csharp
-  - benchmark
+  - webapi
 ---
 
 When designing a file upload service, it's usually a good idea to reject content

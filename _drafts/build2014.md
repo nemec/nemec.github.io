@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Build 2014
+description: Notes from Microsoft Build 2014
 tags:
   - dotnet
   - csharp

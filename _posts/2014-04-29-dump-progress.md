@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Logging IEnumerable Progress
+description: A LINQ extension method that executes every N (or N%) records, which is useful for displaying progress and other things.
 tags:
   - dotnet
   - csharp

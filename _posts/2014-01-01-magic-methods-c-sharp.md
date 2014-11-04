@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Magic Methods in C#
+description: Explaining some of the "magic methods" that the compiler looks for that aren't bound to an interface.
 tags:
   - dotnet
   - csharp

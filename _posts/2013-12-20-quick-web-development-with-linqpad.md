@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Quick Development Web Server With LINQPad and WebApi Attribute Routing
+description: Set up an HTTP web server within LINQPad that responds to any request with pre-programmed responses.
 tags:
   - dotnet
   - csharp

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Exclude parameter from Parameter Binding in WebAPI
+description: How to prevent a parameter in a WebAPI action from being bound from the body or query string.
 tags:
   - dotnet
   - csharp

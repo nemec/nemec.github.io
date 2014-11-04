@@ -5,9 +5,9 @@ layout: default
 <h4>By Dan Nemec</h4>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
-<div class="post">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 {{ content }}
-</div>
+</article>
 
 <div class="share">
   <div class="g-plusone" data-size="medium" data-href="http://blog.nem.ec{{ page.url }}"></div>
@@ -25,49 +25,6 @@ layout: default
   </script>
   <script type="text/javascript" src="http://www.reddit.com/buttonlite.js?i=5"></script>
 </div>
-
-<style type="text/css">
-	a.tooltip {
-		text-decoration: none;
-		border-bottom: 1px dotted white;
-		outline:none;
-		font-weight: normal;
-	}
-	a.tooltip .text {
-		color: white;
-		font-size: smaller;
-		cursor: default;
-	}
-	a.tooltip strong {line-height:30px;}
-	a.tooltip:hover {text-decoration:none;} 
-	a.tooltip .popup {
-		z-index:10;display:none; padding:14px 20px;
-		margin-top:-30px; margin-left:28px;
-		width:300px; line-height:16px;
-	}
-	a.tooltip:hover .popup{
-		display:inline; position:absolute; color:#111;
-		border:1px solid #DCA; background:#fffAF0;}
-		
-	/*CSS3 extras*/
-	a.tooltip .popup
-	{
-		border-radius:4px;
-		box-shadow: 5px 5px 8px #CCC;
-	}
-
-	#disqus_thread.unclicked {
-		background-color: #944337;
-		font-weight: bold;
-		color: white;
-		height: 50px;
-	}
-	
-	#disqus_thread {
-		margin-top 10px;
-		width: 100%;
-	}
-</style>
 
 <div id="disqus_thread" class="comments unclicked">
 	<span>Click to display comments.</span>
