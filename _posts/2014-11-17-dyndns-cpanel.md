@@ -44,10 +44,15 @@ async void Main()
 	var domainToEdit = "example.nem.ec.";  // keep the trailing .
 	var newAddress = await GetCurrentIpAddress();
 	
-	var baseUrl = String.Format("https://{0}:2083/xml-api/cpanel?cpanel_xmlapi_module=ZoneEdit&domain={1}", cpanelDomain, baseDomain);
+	var baseUrl = String.Format(
+        "https://{0}:2083/xml-api/cpanel?cpanel_xmlapi_module=ZoneEdit&domain={1}",
+        cpanelDomain, 
+        baseDomain);
 	
 	var client = new HttpClient();
-	client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", user, pass))));
+	client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+        Convert.ToBase64String(
+            Encoding.ASCII.GetBytes(String.Format("{0}:{1}", user, pass))));
 	var url = baseUrl + "&cpanel_xmlapi_func=fetchzone";
 	
 	var resp = await client.GetAsync(url);
