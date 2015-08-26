@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LINQPad Tip: Make LINQPad scripts executable
+title: "LINQPad Tip: Make LINQPad scripts executable"
 description: Use a custom extension to make scripts execute with lprun.exe when double clicked
 tags:
   - linqpad
