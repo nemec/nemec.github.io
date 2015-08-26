@@ -59,12 +59,24 @@ a:visited { color: #a0a; }
 /*
 /*****************************************************************************/
 
-.site {
-  font-size: 115%;
-  text-align: justify;
-  width: 42em;
-  margin: 3em auto 2em;
-  line-height: 1.5em;
+@media (min-width: 45em) {
+  .site {
+    font-size: 115%;
+    text-align: justify;
+    width: 42em;
+    margin: 3em auto 2em;
+    line-height: 1.5em;
+  }
+}
+
+@media (max-width: 45em) {
+  .site {
+    font-size: 100%;
+    text-align: justify;
+    width: 90%;
+    margin: 5% auto 1em;
+    line-height: 1.5em;
+  }
 }
 
 .header a {
