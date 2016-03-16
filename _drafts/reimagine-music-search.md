@@ -41,4 +41,7 @@ tags:
     * Why can't I take a song and browse all remixes?
     * Discover artists that have remixed other songs (similar to sampling)
     * Promote remixer/mashup artists to "first class" artists.
-    
+  * Also Member Of
+    * Links to other bands where the members of a band overlap
+    * Member leaving a band to become a solo artist (and the opposite)
+
