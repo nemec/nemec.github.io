@@ -2,6 +2,7 @@
 layout: post
 title: "LINQPad Tip: Make LINQPad scripts executable"
 description: Use a custom extension to make scripts execute with lprun.exe when double clicked
+shortlink: https://google.com
 tags:
   - linqpad
   - csharp
@@ -30,7 +31,7 @@ tutorial we're going to create a new extension, .linq**r**, for LINQ Runner.
 The first step is to create a script to test on. Mine is rather simple (don't
 forget to set the language to `C# Program`):
 
-```C#
+```csharp
 void Main(string[] args)
 {
 	Console.WriteLine("Arguments: " + String.Join(", ", args));
