@@ -149,13 +149,13 @@ a:visited { color: #a0a; }
 }
 
 @media (min-width: 45em) {
-  .post .header-image img {
+  .header-image img {
 	width: 42em;
   }
 }
 
 @media (max-width: 45em) {
-  .post .header-image img {
+  .header-image img {
 	width: 90%;
   }
 }
