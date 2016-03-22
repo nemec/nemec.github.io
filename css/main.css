@@ -149,6 +149,7 @@ a:visited { color: #a0a; }
 }
 
 .post .header-image {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
