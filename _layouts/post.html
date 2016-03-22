@@ -12,6 +12,15 @@ layout: default
 <h4>By {{ author.name }}</h4>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
+
+{% if page.headerImage %}
+<div class="header-image">
+	<img src={{ site.url }}/images/{{ headerImage }}
+	{% if page.headerImageAttrib %}
+	<span class="attribution">{{ page.headerImageAttrib | markdownify }}</span>
+</div>
+{% endif %}
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 {{ content }}
 </article>

@@ -8,6 +8,8 @@ tags:
   - dotnet
   - csharp
   - path
+headerImage: autumn-path.jpg
+headerImageAttrib: freebigpictures.com
 ---
 
 PathLib is available on [NuGet](https://www.nuget.org/packages/PathLib/) and its source can be found on [Github](https://github.com/nemec/pathlib)
