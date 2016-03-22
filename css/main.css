@@ -155,23 +155,11 @@ a:visited { color: #a0a; }
 }
 
 @media (max-width: 45em) {
-  .site {
-    font-size: 100%;
-    text-align: justify;
-    width: 90%;
-    margin: 5% auto 1em;
-    line-height: 1.5em;
-  }
   .post .header-image img {
 	width: 90%;
   }
 }
 
-.post .header-image {
-  width: 42em;
-  margin-left: auto;
-  margin-right: auto;
-}
 .post .header-image .attribution {
   text-align: center;
 }
