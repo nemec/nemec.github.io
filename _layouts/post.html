@@ -2,10 +2,10 @@
 layout: default
 ---
 
-{% if page.author %}
+{% if page.author != null %}
 	{% assign author = site.data.authors[page.author] %}
 {% else %}
-	{% assign author = site.data.authors | first %}
+	{% assign author = site.data.authors[0] %}
 {% endif %}
 
 <h1>{{ page.title }}</h1>
