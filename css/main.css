@@ -148,8 +148,27 @@ a:visited { color: #a0a; }
   margin-top: 0.5em;
 }
 
+@media (min-width: 45em) {
+  .post .header-image img {
+	width: 42em;
+  }
+}
+
+@media (max-width: 45em) {
+  .site {
+    font-size: 100%;
+    text-align: justify;
+    width: 90%;
+    margin: 5% auto 1em;
+    line-height: 1.5em;
+  }
+  .post .header-image img {
+	width: 90%;
+  }
+}
+
 .post .header-image {
-  width: 100%;
+  width: 42em;
   margin-left: auto;
   margin-right: auto;
 }
