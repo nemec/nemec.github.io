@@ -1,0 +1,11 @@
+- title: Programming
+  slug: programming
+  description: Coding posts.
+
+- title: Information Security
+  slug: infosec
+  description: Posts about security in the digital age.
+
+- title: Personal
+  slug: personal
+  description: Posts that don't fit into any of the other categories.

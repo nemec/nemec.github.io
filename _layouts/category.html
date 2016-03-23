@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<h1>Category Page for '{{ page.title }}'</h1>
+
+{% unless page.content == '' %}
+  <h4>{{ page.content }}</h4>
+{% endunless %}
+
+<section itemscope itemtype="http://schema.org/Blog">
+      <ul class="posts">
+        {% for post in site.categories.[page.category]  %}
+          <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% else %}
+          <li>There's nothing here!</li>
+        {% endfor %}
+      </ul>
+  </section>

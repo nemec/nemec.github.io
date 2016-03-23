@@ -5,7 +5,7 @@ layout: default
 {% if page.author != null %}
 	{% assign author = site.data.authors[page.author] %}
 {% else %}
-	{% assign author = site.data.authors | first %}
+	{% assign author = site.data.authors['dan-nemec'] %}
 {% endif %}
 
 <h1>{{ page.title }}</h1>

@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+"""
+  Generate missing categories based on _data/categories.yml
+"""
+
+from __future__ import unicode_literals
+
+import frontmatter
+import subprocess
+import os.path
+import logging
+import yaml
+import sys
+import os
+
+
+def git(args):
+    args = ['git'] + args
+    git = subprocess.Popen(args, stdout = subprocess.PIPE)
+    details = git.stdout.read()
+    details = details.decode("utf-8").strip()
+    return details
+
+
+if __name__ == "__main__":
+    root_dir = git(["rev-parse", "--show-toplevel"])
+    with open(os.path.join(root_dir, "_data", "categories.yml"), 'r') as stream:
+      try:
+        categories = yaml.load(stream)
+      except yaml.YAMLError as e:
+        print e
+        sys.exit(1)
+    
+    feed_template_file = os.path.join(os.path.dirname(
+      os.path.realpath(__file__)), "feed.xml.tmpl")
+    with open(feed_template_file, 'r') as tmpl:
+      feed_template = tmpl.read()
+    for cat in categories:
+      cat_dir = os.path.join(root_dir, cat['slug'])
+      if os.path.exists(cat_dir):
+        if not os.path.isdir(cat_dir):
+          print "Category directory '{0}' exists as a file. Skipping.".format(cat['slug'])
+          continue
+      else:
+        os.mkdir(cat_dir)
+      
+      index_file = os.path.join(cat_dir, "index.html")
+      if not os.path.exists(index_file):
+        index = frontmatter.loads("")
+        index['layout'] = "category"
+        index['title'] = cat['title']
+        index['category'] = cat['slug']
+        index.content = cat['description']
+        with open(index_file, 'w') as f:
+          frontmatter.dump(index, f)
+      feed_file = os.path.join(cat_dir, "feed.xml")
+      if not os.path.exists(feed_file):
+        feed = frontmatter.loads(feed_template)
+        feed['title'] = cat['title']
+        feed['slug'] = cat['slug']
+        with open(feed_file, 'w') as f:
+          frontmatter.dump(feed, f)
