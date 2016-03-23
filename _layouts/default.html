@@ -22,16 +22,18 @@
         <link rel="stylesheet" href="/css/syntax.css" />
         
         <link rel="stylesheet" href="/css/main.css" />
-		<link rel="stylesheet" href="/css/comments.css" />
-		
-		<link rel="alternate" type="application/rss+xml" title="nem.ec posts" 
-			href="{{ site.url }}/feed.xml" />
-		<link rel="alternate" type="application/rss+xml" title="nem.ec - Personal" 
-			href="{{ site.url }}/feed.personal.xml" />
-		<link rel="alternate" type="application/rss+xml" title="nem.ec - Tech" 
-			href="{{ site.url }}/feed.tech.xml" />
+	      <link rel="stylesheet" href="/css/comments.css" />
+	
+	      <link rel="alternate" type="application/rss+xml" title="nem.ec posts" 
+		      href="{{ site.url }}/feed.xml" />
+	      <link rel="alternate" type="application/rss+xml" title="nem.ec - Personal" 
+		      href="{{ site.url }}/feed.personal.xml" />
+	      <link rel="alternate" type="application/rss+xml" title="nem.ec - Programming" 
+		      href="{{ site.url }}/feed.programming.xml" />
+	      <link rel="alternate" type="application/rss+xml" title="nem.ec - Information" 
+		      href="{{ site.url }}/feed.programming.xml" />
             
-        <script>
+        {% if site.production %}<script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -40,7 +42,7 @@
             ga('create', 'UA-56129802-1', 'auto');
             ga('require', 'linkid', 'linkid.js');
             ga('send', 'pageview');
-        </script>
+        </script>{% endif %}
     </head>
     <body>
         <div class="site">

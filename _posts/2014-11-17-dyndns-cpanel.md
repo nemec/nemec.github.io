@@ -2,6 +2,7 @@
 layout: post
 title: Dynamic DNS with CPanel
 description: Updating a CPanel DNS entry automatically
+category: programming
 tags:
   - dotnet
   - csharp

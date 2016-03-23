@@ -2,6 +2,7 @@
 layout: post
 title: Conversations With Computers
 description: Using generators to make a simple state machine that accepts input and produces output on each state change.
+category: programming
 tags:
   - python
   - nlp

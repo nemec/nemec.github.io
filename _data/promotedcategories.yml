@@ -1,0 +1,8 @@
+- name: Programming
+  slug: programming
+
+- name: Information Security
+  slug: infosec
+
+- name: Personal
+  slug: personal

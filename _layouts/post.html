@@ -27,7 +27,7 @@ layout: default
 </article>
 
 <div class="share">
-  <div class="g-plusone" data-size="medium" data-href="https://blog.nem.ec{{ page.url }}"></div>
+  <div class="g-plusone" data-size="medium" data-href="{{ site.url }}{{ page.url }}"></div>
   <script type="text/javascript">
     (function() {
       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -37,10 +37,15 @@ layout: default
   </script>
   
   <script type="text/javascript">
-      reddit_url = "https://blog.nem.ec{{ page.url }}";
+      reddit_url = "{{ site.url }}{{ page.url }}";
       reddit_title = "{{ page.title }}";
   </script>
   <script type="text/javascript" src="https://www.reddit.com/buttonlite.js?i=5"></script>
+  
+  {% if page.shortlink != null %}
+  <input type="text" name="shortlink" id="shortlink" onclick="this.select()" readonly
+    value="{{ page.shortlink }}" />
+  {% endif %}
 </div>
 
 <div id="disqus_thread" class="comments unclicked">
@@ -55,10 +60,10 @@ layout: default
 		</span>
 	</a>
 </div>
-<script type="text/javascript">
+{% if site.production %}<script type="text/javascript">
 	var disqus_shortname = 'nemec'; // required: replace example with your forum shortname
 	var disqus_identifier = '{{ page.url }}';
-    var disqus_url = 'https://blog.nem.ec{{ page.url }}';
+    var disqus_url = '{{ site.url }}{{ page.url }}';
 	
 	var thread = document.getElementById("disqus_thread");
 
@@ -79,4 +84,5 @@ layout: default
 	}
 </script>
 <noscript>JavaScript is required to view comments from the Disqus platform.</a></noscript>
+{% endif %}
 

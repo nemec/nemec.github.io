@@ -1,14 +1,16 @@
 ---
-layout: none
+layout: null
+title: Personal
+slug: personal
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{{ site.name | xml_escape }} - Personal</title>
-		<description>Posts categorized as 'personal'</description>
+		<title>{{ site.name | xml_escape }} - {{ page.title }}</title>
+		<description>Posts categorized as '{{ page.slug }}'</description>
 		<link>{{ site.url }}</link>
-		<atom:link href="{{ site.url }}/feed.tech.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.categories.personal limit:10 %}
+		<atom:link href="{{ site.url }}/feed.{{ page.slug }}.xml" rel="self" type="application/rss+xml" />
+		{% for post in site.categories.[page.slug] limit:10 %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
 				<description>{{ post.content | xml_escape }}</description>

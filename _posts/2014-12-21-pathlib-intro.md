@@ -1,9 +1,10 @@
 ---
-layout: post
 title: Exploring PathLib - A path manipulation library for .Net
-description: PathLib is an alternative to the System.IO.Path namespace
-    that provides strong typing for paths combined with methods used
-    specifically for path manipulation.
+description: PathLib is an alternative to the System.IO.Path namespace that provides
+  strong typing for paths combined with methods used specifically for path manipulation.
+layout: post
+shortlink: https://on.nem.ec/22xvXPo
+category: programming
 tags:
   - dotnet
   - csharp
