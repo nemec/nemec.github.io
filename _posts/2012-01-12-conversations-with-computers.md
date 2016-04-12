@@ -56,50 +56,50 @@ For a moment, I considered using classes for the services instead of functions
 The key to conversations here is the ability to send values into generators
   through `generator.send(value)`. Here's an example:
   
-  ```python
-  def generator():
-    response = yield
-    for count in range(5):
-      response = yield "I got " + str(response)
-    
-  gen = generator()
-  gen.next()  # This starts the generator, now we can send values in.
-  count = 0
-  try:
-    while True:  # Keep sending things until the generator gets tired
-      print gen.send("something new " + str(count))
-      count = count + 1
-  except StopIteration:
-  pass # The Generator is finished.
-  ```
+```python
+def generator():
+  response = yield
+  for count in range(5):
+    response = yield "I got " + str(response)
+  
+gen = generator()
+gen.next()  # This starts the generator, now we can send values in.
+count = 0
+try:
+  while True:  # Keep sending things until the generator gets tired
+    print gen.send("something new " + str(count))
+    count = count + 1
+except StopIteration:
+pass # The Generator is finished.
+```
 
 Now that we can give our services extra input while they're in the middle of
   execution, let's have an actual conversation with our computer:
 
-  ```python
-  def ask_about_weather():
-    response = (yield "Hey! How is the weather today?")
+```python
+def ask_about_weather():
+  response = (yield "Hey! How is the weather today?")
 
-    if "cold" in response:
-      yield "You should get a jacket."
-    elif "warm" in response:
-      response = yield "Isn't this weather awesome?"
-      yield "Lets go outside."
-    elif "hot" in response:
-      yield "You should go to the beach!"
-    else:
-      yield "Keep on topic!"
+  if "cold" in response:
+    yield "You should get a jacket."
+  elif "warm" in response:
+    response = yield "Isn't this weather awesome?"
+    yield "Lets go outside."
+  elif "hot" in response:
+    yield "You should go to the beach!"
+  else:
+    yield "Keep on topic!"
 
-  if __name__ == "__main__":
-    try:
-      gen = ask_about_weather()
-      print gen.next()
-      while True:
-        inp = raw_input("> ")
-        print gen.send(inp)
-    except StopIteration:
-      pass
-  ```
+if __name__ == "__main__":
+  try:
+    gen = ask_about_weather()
+    print gen.next()
+    while True:
+      inp = raw_input("> ")
+      print gen.send(inp)
+  except StopIteration:
+    pass
+```
 
 Here we have a reversal of the intended conversation roles. When this script is
   run, the computer asks "How is the weather?". When you type something into
@@ -116,13 +116,13 @@ Here we have a reversal of the intended conversation roles. When this script is
   that exception when they finish but for loops silently catch them and exit
   the loop so you may never have run into them before. Try it:
 
-  ```python
-  >>> i = iter(range(0))
-  >>> i.next()
-  Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-  StopIteration
-  ```
+```python
+>>> i = iter(range(0))
+>>> i.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
 
 I managed to find two solutions to this problem (though there are probably
   more - Pythonistas are a creative bunch). The first is kind of a hack.
@@ -131,22 +131,22 @@ I managed to find two solutions to this problem (though there are probably
   I replaced all `return`s with manual throws of StopIteration, passing the
   final message as an argument.
 
-  ```python
-  def ask_about_weather():
-    response = (yield "Hey! How is the weather today?")
-    response = yield "Isn't this weather awesome?"
-    raise StopIteration("Lets go outside.")
+```python
+def ask_about_weather():
+  response = (yield "Hey! How is the weather today?")
+  response = yield "Isn't this weather awesome?"
+  raise StopIteration("Lets go outside.")
 
-  if __name__ == "__main__":
-    try:
-      gen = ask_about_weather()
-      print gen.next()
-      while True:
-        inp = raw_input("> ")
-        print gen.send(inp)
-    except StopIteration as err:
-      print err
-  ```
+if __name__ == "__main__":
+  try:
+    gen = ask_about_weather()
+    print gen.next()
+    while True:
+      inp = raw_input("> ")
+      print gen.send(inp)
+  except StopIteration as err:
+    print err
+```
 
 I'm not too keen on abusing `raise` to return a value instead of the normal
   process of automatically raising StopIteration when control leaves the
@@ -156,52 +156,52 @@ I'm not too keen on abusing `raise` to return a value instead of the normal
   conversation. Below is an implementation similar to what I ended up using
   in my program:
 
-  ```python
-  def directions(arg):
-    arg = arg.split()
-    to = None
-    frm = None
-    if "to" in arg:  # Populate "to" and "frm" if given
-      to = arg[arg.find("to") + 1]
-    if "from" in arg:
-      frm = arg[arg.find("from") + 1]
-    if to is None:  # Ask for more info if necessary
-      to = yield "Where do you want to go to?"
-    if frm is None:
-      frm = yield "Where are you coming from?"
-    # Present final output
-    yield ("Why do you want to go to " + str(to) +
-          " when you are already in " + str(frm) + "?")
+```python
+def directions(arg):
+  arg = arg.split()
+  to = None
+  frm = None
+  if "to" in arg:  # Populate "to" and "frm" if given
+    to = arg[arg.find("to") + 1]
+  if "from" in arg:
+    frm = arg[arg.find("from") + 1]
+  if to is None:  # Ask for more info if necessary
+    to = yield "Where do you want to go to?"
+  if frm is None:
+    frm = yield "Where are you coming from?"
+  # Present final output
+  yield ("Why do you want to go to " + str(to) +
+        " when you are already in " + str(frm) + "?")
 
-  def weather(arg):
-    arg = arg.split()
-    location = None
-    if "in" in arg:
-      location = arg[arg.find("in") + 1]
-    if location is None:
-      location = yield "Where do you want weather for?"
-    yield "The weather for %s is terrible." % str(location)
+def weather(arg):
+  arg = arg.split()
+  location = None
+  if "in" in arg:
+    location = arg[arg.find("in") + 1]
+  if location is None:
+    location = yield "Where do you want weather for?"
+  yield "The weather for %s is terrible." % str(location)
 
-  if __name__ == "__main__":
-    current_conversation = None
-    while True:
-      inp = raw_input("> ")
-      if current_conversation is not None:
-        try:
-          print current_conversation.send(inp)
-        except StopIteration:
-          current_conversation = None
-      # Note no elif - when StopIteration happens, we
-      # fall through and start a new conversation with inp
-      if current_conversation is None:
-        if "directions" in inp:  # Choose which service to use
-          current_conversation = directions(inp)
-        elif "weather" in inp:
-          current_conversation = weather(inp)
-        else:
-          break
-        print current_conversation.next()  # Go to first "yield" statement
-  ```
+if __name__ == "__main__":
+  current_conversation = None
+  while True:
+    inp = raw_input("> ")
+    if current_conversation is not None:
+      try:
+        print current_conversation.send(inp)
+      except StopIteration:
+        current_conversation = None
+    # Note no elif - when StopIteration happens, we
+    # fall through and start a new conversation with inp
+    if current_conversation is None:
+      if "directions" in inp:  # Choose which service to use
+        current_conversation = directions(inp)
+      elif "weather" in inp:
+        current_conversation = weather(inp)
+      else:
+        break
+      print current_conversation.next()  # Go to first "yield" statement
+```
 
 Both `directions` and `weather` are pretty much the same thing for differing
   numbers of "arguments". If there is missing information, one of the 
@@ -209,16 +209,16 @@ Both `directions` and `weather` are pretty much the same thing for differing
   printed. After the final output is printed, the next input is used to start
   an entirely new conversation.
 
-  ```
-  > I want the weather.
-  Where do you want weather for?
-  > Kansas
-  The weather for Kansas is terrible.
-  > Give me directions to Canada.
-  Where are you coming from?
-  > America
-  Why do you want to go to Canada when you are already in America?
-  ```
+```
+> I want the weather.
+Where do you want weather for?
+> Kansas
+The weather for Kansas is terrible.
+> Give me directions to Canada.
+Where are you coming from?
+> America
+Why do you want to go to Canada when you are already in America?
+```
 
 Of course, you'll notice that you can only hold one conversation at a time.
   That's fine for this application, but what about in a networked environment
