@@ -30,6 +30,18 @@ tags:
       of hurting pedestrians/damaging cars in case of malfunction
 * Internal wifi
 * 3G/4G connection
+* API access, status and control
+    * Remote start
+    * Climate
+    * Door locks
+    * Door open close (and control w/ hydraulics??)
+    * Fuel Gauge
+    * Guest/valet mode
+        * Warnings when driven over x speed or outside x geofence
+* Location tracking
+    * Able to see history of where you've been
+    * Reports current location of car (Find My Car!)
+    
 * Dashcam - front, back, and internal
     * Stream (lo-fi) straight to cloud backup server in emergencies
     * Store HD locally, copy to backup when arrive home
