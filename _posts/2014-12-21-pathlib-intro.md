@@ -15,7 +15,7 @@ headerImageAttrib: freebigpictures.com
 
 PathLib is available on [NuGet](https://www.nuget.org/packages/PathLib/) and its source can be found on [Github](https://github.com/nemec/pathlib)
 
-##Why a library for paths?
+## Why a library for paths?
 
 Paths are commonly used in programming, from opening files to storage directories. They're integral to any program, yet unlike their siblings URLs and URIs very few programming languages (with strong typing) have a strongly typed solution for storing and manipulating paths.
 
@@ -87,7 +87,7 @@ There are four main classes and two main interfaces in the library:
 
 Since application and library developers usually want to be as cross-platform-compatible as possible, it doesn't make much sense to explicitly create instances of a "windows path" or "posix path". To that end, the library provides a couple of path factories that automatically detect the user's operating system and create the appropriate path on command.
 
-###PurePathFactory
+### PurePathFactory
 
 This factory builds a pure path for the current operating system. You may also provide a set of `PurePathFactoryOptions` to the builder:
 
