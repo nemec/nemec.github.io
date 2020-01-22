@@ -146,16 +146,16 @@ to the pingback element (e.g. `<link rel="pingback" href="https://wordpress.nem.
 
 Note both the pingback URL *and* the full URL to the blog post for later.
 
-Pingback URL
+**Pingback URL**
 
     https://wordpress.nem.ec/xmlrpc.php
 
-Blog Post URL
+**Blog Post URL**
 
     https://wordpress.nem.ec/2020/01/22/hello-world/
 
 
-Now, load the following website in your browser: https://webhook.site/
+Now, load the following website in your browser: <https://webhook.site/>
 
 If this is the first time loading the site, you will be redirected to a
 brand new unique URL (e.g. `https://webhook.site/#!/e1f36ec8-850a-4cc3-b3dc-c3d19448a6b2`)
@@ -165,7 +165,7 @@ ok, you can ignore them.
 
 ![webhook.site screenshot](/images/2020/01/webhook-site.png)
 
-Now visit the URL https://reqbin.com/ in your browser. Click on the `Content`
+Now visit the URL <https://reqbin.com/> in your browser. Click on the `Content`
 tab and choose `XML (application/xml)` as your content type instead of the
 default:
 
@@ -236,7 +236,7 @@ after your request. The XML looks like this:
 ```
 
 Therefore, the only way you can tell that you were successful is by checking
-the request log on your https://webhook.site tab. After sending my previous
+the request log on your <https://webhook.site> tab. After sending my previous
 request, this is what I see:
 
 ![reqbin log](/images/2020/01/reqbin-success.png)
@@ -267,11 +267,11 @@ on your router/firewall.
 Follow the first paragraph of the previous section to record your Pingback URL
 and Blog Post URL
 
-Pingback URL
+**Pingback URL**
 
     https://wordpress.nem.ec/xmlrpc.php
 
-Blog Post URL
+**Blog Post URL**
 
     https://wordpress.nem.ec/2020/01/22/hello-world/
 
