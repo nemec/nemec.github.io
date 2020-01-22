@@ -2,6 +2,7 @@
 layout: post
 title: Discovering the IP address of a Wordpress site hidden behind Cloudflare
 description: Use pingbacks to expose the IP address of a Wordpress site proxied by Cloudflare
+category: infosec
 tags:
   - cloudflare
   - wordpress
