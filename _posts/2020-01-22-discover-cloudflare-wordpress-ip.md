@@ -212,7 +212,7 @@ their IP address with this technique.
 
 This method is, additionally, a bit of a blind process. Whether your check
 succeeds or not, you should expect to get a "faultCode" of 0 back from the server
-after your request. The XMl looks like this:
+after your request. The XML looks like this:
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
