@@ -7,7 +7,7 @@ tags:
   - wordpress
   - infosec
   - osint
-headerImage: portugal-3029665_1920.jpg
+headerImage: 2020/01/portugal-3029665_1920.jpg
 headerImageAttrib: Julius Silver @ pixabay.com
 ---
 
@@ -74,13 +74,13 @@ Take the following diagram showing the normal communication with Cloudflare
 and the Wordpress site. Cloudflare will not divulge the IP address it uses
 to communicate with the backend, which forces us to find another way around.
 
-![normal cloudflare proxy flow](2020/01/cloudflare-wordpress-normal.png)
+![normal cloudflare proxy flow](/images/2020/01/cloudflare-wordpress-normal.png)
 
 Compare with this next diagram, showing how a pingback will convince the
 Wordpress server to reach out to our "honeypot" pingback server which relays
 the IP address it finds back to us.
 
-![cloudflare proxy flow with pingback](2020/01/cloudflare-wordpress-bypass.png)
+![cloudflare proxy flow with pingback](/images/2020/01/cloudflare-wordpress-bypass.png)
 
 
 Setup
@@ -95,7 +95,7 @@ IP could not have been leaked through normal channels.
 \* I will leave this site up for a short time, feel free to test the technique
 while it's available :)
 
-![wordpress homepage](2020/01/wordpress-homepage.png)
+![wordpress homepage](/images/2020/01/wordpress-homepage.png)
 
 To test this, I've pinged my test hostname:
 
@@ -105,14 +105,14 @@ Which returns the following IP address:
 
     104.28.27.49
 
-![ping command output showing IP](2020/01/ping-wordpress-ip.png)
+![ping command output showing IP](/images/2020/01/ping-wordpress-ip.png)
 
 Plug this IP address into any IP lookup site, such as [myip.ms](https://myip.ms/info/whois/104.28.27.49),
 and you will see that the IP address owner is "Cloudflare, Inc" - as expected.
 The same applies if you look up [the domain name](https://myip.ms/info/whois/104.28.26.49/k/251136401/website/wordpress.nem.ec)
 directly.
 
-![myip.ms demonstration](2020/01/myip-ms.png)
+![myip.ms demonstration](/images/2020/01/myip-ms.png)
 
 
 In order to discover the private IP address behind my server, there are two
@@ -141,7 +141,7 @@ source code for the page. Press `Ctrl+F` and search for the word `pingback`. If
 pingbacks are enabled, there will be a URL inside the "href" attribute linked
 to the pingback element (e.g. `<link rel="pingback" href="https://wordpress.nem.ec/xmlrpc.php">`)
 
-![pingback source](2020/01/pingback-enabled.png)
+![pingback source](/images/2020/01/pingback-enabled.png)
 
 Note both the pingback URL *and* the full URL to the blog post for later.
 
@@ -162,18 +162,18 @@ and the website will begin "Waiting for first request...". If you've used
 the website before, you may see some old requests listed in the sidebar. That's
 ok, you can ignore them.
 
-![webhook.site screenshot](2020/01/webhook-site.png)
+![webhook.site screenshot](/images/2020/01/webhook-site.png)
 
 Now visit the URL https://reqbin.com/ in your browser. Click on the `Content`
 tab and choose `XML (application/xml)` as your content type instead of the
 default:
 
-![reqbin content type selected](2020/01/reqbin-content-type.png)
+![reqbin content type selected](/images/2020/01/reqbin-content-type.png)
 
 Now, change the `GET` dropdown to `POST` and paste the Pingback URL you recorded
 earlier into the URL box next to the dropdown:
 
-![reqbin POST URL](2020/01/reqbin-url.png)
+![reqbin POST URL](/images/2020/01/reqbin-url.png)
 
 After that, copy and paste the following template into the XML content text area:
 
@@ -200,7 +200,7 @@ You must replace both URLs in the template with ones of your own. The first is
 your *own* unique webhook.site URL that you found at the beginning of this
 section. The second is the complete blog post URL you also recorded earlier.
 
-![reqbin content template](2020/01/reqbin-content.png)
+![reqbin content template](/images/2020/01/reqbin-content.png)
 
 Click "Send" and wait for a response from the server. If the server attempts
 to redirect you to the homepage this likely means the server has installed
@@ -238,7 +238,7 @@ Therefore, the only way you can tell that you were successful is by checking
 the request log on your https://webhook.site tab. After sending my previous
 request, this is what I see:
 
-![reqbin log](2020/01/reqbin-success.png)
+![reqbin log](/images/2020/01/reqbin-success.png)
 
 Success! There is one request found and it displays a new IP address that
 we haven't seen before. If you click on the small "whois" link next to the IP,
@@ -280,7 +280,7 @@ so it needs to be port 80. If your router allows, you can redirect the router
 port to some other range on your own PC. The method for doing this
 will differ for every router. Consult your manual if necessary.
 
-![opened port](2020/01/port-open.png)
+![opened port](/images/2020/01/port-open.png)
 
 Next, find your *public* IP address. You can find this with the following
 command, if necessary:
@@ -355,7 +355,7 @@ Example:
 
     curl -k -H 'wordpress.nem.ec' https://64.225.37.249
 
-![verifying the IP address. result includes my wordpress blog URL](2020/01/verify-ip.png)
+![verifying the IP address. result includes my wordpress blog URL](/images/2020/01/verify-ip.png)
 
 This may not work if your target website runs on shared hosting with a shared IP,
 which will use a technique called Server Name Indication (SNI) to run multiple
@@ -365,6 +365,6 @@ using the traditional DNS lookup. It *must* include the port and full domain nam
 
     curl -k --resolve wordpress.nem.ec:443:64.225.37.249 https://wordpress.nem.ec
 
-![verifying the IP address with the resolve argument](2020/01/verify-ip-sni.png)
+![verifying the IP address with the resolve argument](/images/2020/01/verify-ip-sni.png)
 
 And that's it. Happy hunting!
