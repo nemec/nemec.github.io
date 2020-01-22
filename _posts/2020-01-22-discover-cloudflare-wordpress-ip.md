@@ -161,11 +161,11 @@ If this is the first time loading the site, you will be redirected to a
 brand new unique URL (e.g. `https://webhook.site/#!/e1f36ec8-850a-4cc3-b3dc-c3d19448a6b2`)
 and the website will begin "Waiting for first request...". If you've used
 the website before, you may see some old requests listed in the sidebar. That's
-ok, you can ignore them.
+ok, you can ignore them. Leave this tab open until later.
 
 ![webhook.site screenshot](/images/2020/01/webhook-site.png)
 
-Now visit the URL <https://reqbin.com/> in your browser. Click on the `Content`
+In a new tab, visit the URL <https://reqbin.com/> in your browser. Click on the `Content`
 tab and choose `XML (application/xml)` as your content type instead of the
 default:
 
@@ -279,17 +279,27 @@ Now go into your router and forward TCP port 80 to your PC. In my experience,
 Wordpress will refuse to send a pingback to ports other than 80 or 443 (https)
 so it needs to be port 80. If your router allows, you can redirect the router
 port to some other range on your own PC. The method for doing this
-will differ for every router. Consult your manual if necessary.
+will differ for every router. Consult your manual if necessary. If you decide
+to rent a VPS (Virtual Private Server) to test this, your port 80 will
+likely already be open to the internet and you can skip this step.
 
 ![opened port](/images/2020/01/port-open.png)
 
-Next, find your *public* IP address. You can find this with the following
-command, if necessary:
+Next, find your *public* IP address. If you have an IP that begins with 192.168.* or
+10.0.* it is likely a *private* IP address and will not work. Additionally, 
+some ISPs block receiving data on port 80 to prevent you from self-hosting websites
+on a residential plan and if your PC is behind a VPN you will be unable to receive
+the pingback from the target server either. In this case, disable your VPN or rent
+a VPS for a short time to provide a "honeypot" for the target Wordpress server
+to contact.
+
+You can find your public IP with the following command, if necessary:
 
     curl -4 icanhazip.com
 
 In an empty terminal window, run the following command. It will wait for a new
-connection from the target Wordpress server.
+connection from the target Wordpress server. `sudo` is necessary because we are
+listening on a port <= 1024, which are reserved for only root/admin access.
 
     sudo netcat -v -l -p 80
 
@@ -341,15 +351,21 @@ X-Pingback-Forwarded-For: 10.0.0.1
 Connection: close
 ```
 
-Check the second line of the output to get the IP address of the Wordpress server.
+If you don't receive any output from the netcat command, it could be caused by
+any number of reasons and, unfortunately, the target Wordpress server will not
+tell you exactly why it failed. Check that you can connect with your netcat session
+on your public IP (e.g. `curl http://my.public.ip`) and that you do not have any
+OS firewall blocking access.
+
+Check the second line of the netcat output to get the IP address of the Wordpress server.
 As before, the hidden value is `64.225.37.249`.
 
 
 Verifying the IP Address
 ========================
 
-Now that you have an IP address, how can you check that it's real? One simple
-way is to make a cURL request and fake the Host header to pretend like it's
+Now that you have an IP address, how can you check that it really belongs to your target?
+One simple way is to make a cURL request and fake the Host header to pretend like it's
 coming from the server's hostname.
 
 Example:
