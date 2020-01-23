@@ -44,7 +44,7 @@ or [white nationalist content](https://www.wired.com/story/free-speech-issue-clo
 on its networks. Without much help from Cloudflare's support team, investigators
 are often forced to find ways around Cloudflare's IP protection.
 
-There are a lot of cool tools, including [Francisco Poldi's *fav-up*](https://github.com/pielco11/fav-up),
+There are a lot of cool tools, including [Francesco Poldi's *fav-up*](https://github.com/pielco11/fav-up),
 [Crimeflare](http://www.crimeflare.org:82/cfs.html) and techniques shared in
 [this SecJuice post](https://www.secjuice.com/finding-real-ips-of-origin-servers-behind-cloudflare-or-tor/),
 to identify the true IP address behind a Cloudflare-protected domain,
