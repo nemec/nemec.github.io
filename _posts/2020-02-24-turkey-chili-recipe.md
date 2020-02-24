@@ -51,7 +51,7 @@ In a large, heavy pot over high heat, brown the meat in batches. As it is cooked
 *6 garlic cloves, minced*  
 *3 jalapeños, seeded and chopped*  
 *1.5 tbsp masa harina*  
-*2 tbsp chile powder
+*2 tbsp chile powder*  
 *2 tbsp cumin*  
 *0.5 tbsp oregano*
 
