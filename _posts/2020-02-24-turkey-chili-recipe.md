@@ -10,7 +10,7 @@ headerImageAttrib: Julia Moskin @ NY Times Cooking
 I began with the following NY Times recipe, but modified it a lot for my tastes
 and ingredients I could find at the store.
 
-https://cooking.nytimes.com/recipes/1017160-texas-style-chili
+<https://cooking.nytimes.com/recipes/1017160-texas-style-chili>
 
 Below is my modified recipe:
 
