@@ -61,7 +61,7 @@ To the empty pot, add the onion, garlic, jalapeños, masa harina, chile powder, 
 
 ## Step 3
 
-### Ingredients in Step 3
+### Ingredients Used in Step 3
 
 *cooked ground turkey*  
 *3.5 cups water*  
