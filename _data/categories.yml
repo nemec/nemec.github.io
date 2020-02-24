@@ -5,6 +5,10 @@
 - title: Information Security
   slug: infosec
   description: Posts about security in the digital age.
+  
+- title: Recipes
+  slug: recipes
+  description: Recipes I've created or modified and published publicly.
 
 - title: Personal
   slug: personal
