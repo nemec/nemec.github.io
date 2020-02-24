@@ -67,7 +67,7 @@ To the empty pot, add the onion, garlic, jalapeños, masa harina, chile powder, 
 *3.5 cups water*  
 *28 oz tomatoes, crushed with liquid*  
 *2 tbsp chile powder*  
-*1 tsp salt*  
+*0.5 tsp salt*  
 *1 tbsp cocoa powder*  
 *1 tsp cinnamon*
 
