@@ -19,25 +19,25 @@ Below is my modified recipe:
 
 ## Full Ingredients
 
-2 lb ground turkey  
-2 tbsp cumin  
-4 tbsp chile powder  
-1 tsp salt  
-0.5 tbsp oregano  
-1.5 tbsp masa harina  
-1 tbsp cocoa powder (can use 0.5 oz unsweetened chocolate if you have on hand)  
-1 tsp cinnamon  
-1 white onion, chopped  
-6 garlic cloves, minced  
-3 jalapeños, seeded and chopped  
-28 oz canned tomatoes, crushed - with liquid  
-3.5 cups water
+*2 lb ground turkey*  
+*2 tbsp cumin*  
+*4 tbsp chile powder*  
+*1 tsp salt*  
+*0.5 tbsp oregano*  
+*1.5 tbsp masa harina*  
+*1 tbsp cocoa powder (can use 0.5 oz unsweetened chocolate if you have on hand)*  
+*1 tsp cinnamon*  
+*1 white onion, chopped*  
+*6 garlic cloves, minced*  
+*3 jalapeños, seeded and chopped*  
+*28 oz canned tomatoes, crushed - with liquid*  
+*3.5 cups water*
 
 ## Step 1
 
 ### Ingredients Used in Step 1
 
-2 lb ground turkey
+*2 lb ground turkey*
 
 ### Directions
 
@@ -47,13 +47,13 @@ In a large, heavy pot over high heat, brown the meat in batches. As it is cooked
 
 ### Ingredients Used in Step 2
 
-1 white onion, chopped  
-6 garlic cloves, minced  
-3 jalapeños, seeded and chopped  
-1.5 tbsp masa harina  
-2 tbsp chile powder
-2 tbsp cumin    
-0.5 tbsp oregano
+*1 white onion, chopped*  
+*6 garlic cloves, minced*  
+*3 jalapeños, seeded and chopped*  
+*1.5 tbsp masa harina*  
+*2 tbsp chile powder
+*2 tbsp cumin*  
+*0.5 tbsp oregano*
 
 ### Directions
 
@@ -63,13 +63,13 @@ To the empty pot, add the onion, garlic, jalapeños, masa harina, chile powder, 
 
 ### Ingredients in Step 3
 
-cooked ground turkey  
-3.5 cups water  
-28 oz tomatoes, crushed with liquid  
-2 tbsp chile powder  
-1 tsp salt  
-1 tbsp cocoa powder  
-1 tsp cinnamon
+*cooked ground turkey*  
+*3.5 cups water*  
+*28 oz tomatoes, crushed with liquid*  
+*2 tbsp chile powder*  
+*1 tsp salt*  
+*1 tbsp cocoa powder*  
+*1 tsp cinnamon*
 
 ### Directions
 
