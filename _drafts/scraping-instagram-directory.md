@@ -149,14 +149,6 @@ Future Work
 
 * Document / release code for others to replicate
 * Scan all the other countries
-  * I've been working on integrating the [Luminati](https://luminati.io/)
-    proxy network into Scrapy with a popular proxy plugin. First tests
-    offer a promising reduction/eliminiation of rate limiting with a low
-    delay, but it needs more testing. I'd hate to get an account banned
-    if Instagram recognizes that I'm rotating proxies. Plus... it costs $$
-    (although Luminati's shared IP space offers a promising plan - by my
-    calculation, scraping all of Colombia with their proxies would have
-    cost me all of $1).
 * Harvest data on a few new fields that I missed the first time
   * Log the locations that are "missing" - are there patterns?
   * Canonical location ID. There were about 150 "duplicate" records
