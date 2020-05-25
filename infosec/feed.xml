@@ -11,7 +11,7 @@ title: Information Security
 		<description>Posts categorized as '{{ page.slug }}'</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.{{ page.slug }}.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.categories.[page.slug] limit:10 %}
+		{% for post in site.categories[page.slug] limit:10 %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
 				<description>{{ post.content | xml_escape }}</description>
