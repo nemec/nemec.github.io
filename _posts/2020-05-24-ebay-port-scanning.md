@@ -15,8 +15,8 @@ There's a story going around the internet about Ebay port scanning its visitors
 without any permission or even indication that it's happening (without digging
 into the browser's developer tools) - it's absolutely true. But why are they
 doing it, and what is Ebay doing with the data it collects? I took a peek into
-the code to find out, and I'm sure what I found is only a small part of the
-full story.
+the code to find out (adapted from [this thread](https://twitter.com/djnemec/status/1264523835044442113)),
+and I'm sure what I found is only a small part of the full story.
 
 The saga began, like many do, with Twitterlings dunking on a brand for cheap laughs.
 VPN provider NordVPN [shared a post](https://web.archive.org/web/20200523211450/https:/twitter.com/NordVPN/status/1264284967602970631)
