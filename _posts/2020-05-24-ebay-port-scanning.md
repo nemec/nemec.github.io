@@ -8,7 +8,7 @@ tags:
   - infosec
   - osint
 headerImage: 2020/05/port-scan-header.png
-headerImageAttrib: via - bitninja.io
+headerImageAttrib: image credit - bitninja.io
 ---
 
 There's a story going around the internet about Ebay port scanning its visitors
