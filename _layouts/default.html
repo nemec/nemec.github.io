@@ -6,28 +6,30 @@
         
         {% if page.title %}
             <title>{{ page.title }} - {{ site.name }}</title>
+            <meta name="og:title" content="{{ page.title }} - {{ site.name }}"/>
         {% else %}
             <title>{{ site.name }}</title>
+            <meta name="og:title" content="{{ site.name }}"/>
         {% endif %}
         
         <meta name="viewport" content="width=device-width" />
         
         {% if page.description %}
-            <meta name="twitter:card" content="summary"></meta>
+            <meta name="twitter:card" content="summary"/>
             <meta name="description" content="{{ page.description }}" />
-            <meta property="og:description" content="{{ page.description }}"></meta>
+            <meta property="og:description" content="{{ page.description }}"/>
         {% else %}
             <meta name="description" content="{{ site.description }}" />
-            <meta name="twitter:card" content="summary"></meta>
-            <meta property="og:description" content="{{ site.description }}"></meta>
+            <meta name="twitter:card" content="summary"/>
+            <meta property="og:description" content="{{ site.description }}"/>
         {% endif %}
 
 
-        <meta name="twitter:site" content="@djnemec"></meta>
-        <meta name="twitter:creator" content="@djnemec"></meta>
+        <meta name="twitter:site" content="@djnemec"/>
+        <meta name="twitter:creator" content="@djnemec"/>
 
         {% if page.headerImage %}
-            <meta property="og:image" content="{{ page.headerImage }}"></meta>
+            <meta property="og:image" content="{{ site.url }}/{{ page.headerImage }}"/>
         {% endif %}
 
         <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html',''}}">
