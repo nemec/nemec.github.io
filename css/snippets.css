@@ -1,0 +1,49 @@
+pre.highlight {
+    padding: 6px 10px;
+    background-color: #e8e8e8;
+    border: 1px solid lightslategray;
+}
+
+.replaced-text {
+    font-weight: bold;
+}
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+.code-builder {
+    margin-top: 2em;
+}
+
+.snippet {
+    position: relative;
+}
+
+#copied {
+    opacity: 1;
+    transition: opacity 0.25s;
+}
+
+#copied.fade {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.codecopy-btn {  
+    margin-top: 6px;
+    box-shadow: none;
+    min-height: initial;
+
+    z-index: 1;
+}
+
+.codecopy-btn-icon {
+    border-radius: 0;
+    position: relative;
+    top: 3px;
+    padding: 0;
+    vertical-align: initial;
+    min-height: initial;
+}

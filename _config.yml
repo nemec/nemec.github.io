@@ -8,6 +8,11 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
+collections:
+  code-snippets:
+    output: true
+    slug: "code-snippets"
+
 exclude:
   - "*.bak"
   - "tasks"

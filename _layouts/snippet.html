@@ -1,0 +1,185 @@
+---
+layout: default
+custom_css:
+    - snippets.css
+custom_js_top:
+    - clipboard.js
+---
+
+<h1>{{ page.title }}</h1>
+
+{% if page.description %}<p>{{ page.description }}</p>{% endif %}
+
+
+<article class="snippet">
+{{ content }}
+</article>
+
+{% if page.variables %}
+<button class="codecopy-btn tooltipped tooltipped-s" aria-label="Copy to clipboard">
+    <svg height="16" class="codecopy-btn-icon" viewBox="0 0 14 16" version="1.1" width="16" aria-hidden="true">
+        <path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path>
+    </svg>
+    Copy All Snippets
+</button>
+<span id="copied" class="fade">Copied!</span>
+
+<div class="code-builder">
+    <h3>Use your own input</h3>
+    <p>
+        If you have values you'd like to use instead of the provided variables,
+        type or paste your data into the variable inputs below. If Javascript is
+        enabled, your text will automatically be added to the command and you
+        can click to copy.
+    </p>
+    {% for var in page.variables %}
+    <div>
+    <label for="{{ var[0] }}">{{ var[0] }}: </label>
+    <input
+        class="variable-input"
+        type="{% if var[1].type %}{{ var[1].type }}{% else %}text{% endif %}"
+        {% for attr in var[1].attrs %}
+        {{ attr[0] }}="{{ attr[1] }}"
+        {% endfor %}
+        data-language="{{ page.language }}"
+        data-replace="{% if var[1].replace %}{{ var[1].replace }}{% else %}{{ var[0] }}{% endif %}"
+        id="{{ var[0] }}" />
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<script type="text/javascript">
+    var copyBtn = document.querySelector('.codecopy-btn');
+    if(copyBtn !== null) { // If null, there are no variables
+        copyBtn.addEventListener('click', function(event) {
+            var codeElems = document.getElementsByTagName('pre');
+            var text = [];
+            for(var i = 0; i < codeElems.length; i++) {
+                if(text.length > 0) text.push('\n\n');
+                text.push(codeElems[i].innerText.trim());
+            }
+            copyTextToClipboard(text.join("")).then(function() {
+                document.getElementById('copied').classList.remove('fade');
+                setTimeout(function(){
+                    document.getElementById('copied').classList.add('fade');
+                }, 2000);
+            });
+        });
+
+        // traverse DOM
+        // replace text with node
+        // attach input change handler to rewrite node
+        var inputs = document.querySelectorAll('.variable-input');
+        var codeElems = document.getElementsByTagName('code');
+        for(var i = 0; i < codeElems.length; i++) {
+            var item = codeElems[i];
+            traverseNode(item, inputs);
+        }
+    }
+
+    function escapeInput(text, quoteChar) {
+        var rx = new RegExp(quoteChar, 'g');
+        return text.replace(rx, '\\' + quoteChar);
+    }
+
+    function quoteInputByLanguage(text, language, type) {
+        function quoteAndEscape(text, quoteChar) {
+            return quoteChar + escapeInput(text, quoteChar) + quoteChar;
+        }
+        switch(language) {
+            case 'bash':
+                if(type === 'text') return quoteAndEscape(text, "'");
+                break;
+            case 'python':
+                if(type !== 'number') return quoteAndEscape(text, '"');
+                break;
+            default:
+                if(type === 'text' &&
+                   text.indexOf(' ') >= 0 ||
+                   text.indexOf('&') >= 0) {
+                    return quoteAndEscape(text, '"');
+                }
+                break;
+        }
+        return text;
+    }
+
+    function onInput(codeNode) {
+        return function(e) {
+            var wrapNode = codeNode;
+            if(wrapNode.classList === undefined) {
+                wrapNode = wrapNode.parentNode;
+            }
+
+            if(e.target.value === '') {
+                codeNode.textContent = e.target.dataset.replace;
+                wrapNode.classList.remove('replaced-text');
+            }
+            else {
+                var text = e.target.value;
+
+                var prevSib = wrapNode.previousSibling;
+                var prevText = prevSib !== null ? prevSib.textContent.trim() : '';
+                var prevChar = prevText.substr(prevText.length-1, 1);
+                var nextSib = wrapNode.nextSibling;
+                var nextText = nextSib !== null ? nextSib.textContent.trim() : '';
+                var nextChar = nextText.substr(0, 1);
+                if((prevChar == '"' || prevChar == "'") &&
+                   (nextChar == '"' || nextChar == "'")) {
+                    codeNode.textContent = escapeInput(text, prevChar);
+                }
+                else if(prevChar !== '' && prevChar !== ' ') {
+                    codeNode.textContent = text;
+                }
+                else {
+                    codeNode.textContent = quoteInputByLanguage(
+                        text, e.target.dataset.language, e.target.type);
+                }
+                wrapNode.classList.add('replaced-text');
+            }
+        }
+    }
+
+    function traverseNode(node, inputs) {
+        if(node.nodeType == Node.TEXT_NODE) {
+            for(var i = 0; i < inputs.length; i++) {
+                var text_to_find = inputs[i].dataset.replace;
+                var content = node.textContent;
+                var idx = content.indexOf(text_to_find);
+                if(idx >= 0) {
+                    if(idx == 0 && text_to_find.length == content.length) {
+                        // bind to existing node
+                        inputs[i].addEventListener('input', onInput(node));
+                        inputs[i].addEventListener('propertychange', onInput(node));
+                    }
+                    else {
+                        // embed new node
+                        console.log('partial match');
+                        var container = document.createElement('span');
+                        var prefix = document.createTextNode(
+                            content.substr(0, idx));
+                        var textNode = document.createElement('span');
+                        textNode.innerText = text_to_find;
+                        var suffix = document.createTextNode(
+                            content.substr(idx + text_to_find.length));
+                        console.log("prefix: " + prefix.textContent);
+                        console.log("suffix: " + suffix.textContent);
+                        container.appendChild(prefix);
+                        container.appendChild(textNode);
+                        container.appendChild(suffix);
+                        node.replaceWith(container);
+
+                        inputs[i].addEventListener('input', onInput(textNode));
+                        inputs[i].addEventListener('propertychange', onInput(textNode));
+                    }
+                    console.log('Successfully bound input ' + inputs[i].id);
+                }
+            }
+        }
+        var children = node.childNodes;
+        for(var i = 0; i < children.length; i++) {
+            traverseNode(children[i], inputs);
+        }
+    }
+</script>
