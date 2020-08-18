@@ -54,10 +54,15 @@
 	      <link rel="alternate" type="application/rss+xml" title="nem.ec - {{ category.title }}" 
 		      href="{{ site.url }}/{{ category.slug }}/feed.xml" />
         {% endfor %}
-        {% if layout.custom_js_top %}
-          {% for script in layout.custom_js_top %}
+        {%- if layout.custom_js_top -%}
+          {%- for script in layout.custom_js_top -%}
         <script type="text/javascript" src="{{ site.url }}/js/{{ script }}"></script>
-          {% endfor %}
+          {%- endfor -%}
+        {% endif %}     
+        {%- if page.custom_js_top -%}
+          {%- for script in page.custom_js_top -%}
+        <script type="text/javascript" src="{{ site.url }}/js/{{ script }}"></script>
+          {%- endfor -%}
         {% endif %}            
         {% if site.production %}<script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
