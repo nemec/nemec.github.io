@@ -7,6 +7,10 @@ tags:
   - ffmpeg
 language: bash
 variables:
+  Input Photo:
+    replace: image.jpg
+  Input Video:
+    replace: audio.wav
   Output file:
     #type: date # https://www.w3schools.com/html/html_form_input_types.asp
     replace: out.mp4
