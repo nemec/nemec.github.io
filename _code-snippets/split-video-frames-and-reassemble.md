@@ -16,5 +16,8 @@ variables:
 ```bash
 mkdir frames
 ffmpeg -i $INPUT_FILE frames/thumb%04d.jpg -hide_banner
+
+# Edit frames as necessary before continuing
+
 ffmpeg -framerate 30 -pattern_type glob -i 'frames/*.jpg' -c:v libx264 -pix_fmt yuv420p $OUTPUT_FILE
 ```
