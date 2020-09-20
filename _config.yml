@@ -17,5 +17,6 @@ exclude:
   - "*.bak"
   - "tasks"
 
-gems:
+plugins:
   - jekyll-sitemap
+  - jekyll-target-blank

@@ -49,7 +49,7 @@ For a moment, I considered using classes for the services instead of functions
   regular functions always beginning execution at the "top" of the function).
   This isn't supposed to be an introduction to generators, so if you're
   unfamiliar with them I will instead point you toward
-  [two](http://www.prasannatech.net/2009/07/introduction-python-generators.html)
+  [two](https://web.archive.org/web/20170423181122/http://www.prasannatech.net/2009/07/introduction-python-generators.html)
   [great](http://wiki.python.org/moin/Generators) tutorials on them if you need
   to brush up - go ahead, this page won't expire by the time you get back.
 

@@ -1,0 +1,10 @@
+{% comment %}
+
+Example:
+{% include image.html url="/images/my-cat.jpg" desc="My cat, Robert Downey Jr." alt="An alt text" %}
+
+{% endcomment %}
+<figure class="image">
+    <img src="{{ include.url }}" alt="{{ include.desc | default:include.alt }}">
+    <figcaption>{{ include.description }}</figcaption>
+</figure>

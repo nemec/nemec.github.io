@@ -24,7 +24,7 @@ body {
 }
 
 h1,h2,h3 {
-  margin-bottom: 1em;
+  margin-bottom: 0.7em;
   line-height: normal;
 }
 p { margin: 1em 0; }
@@ -38,6 +38,31 @@ a:visited { color: #a0a; }
 /* Home
 /*
 /*****************************************************************************/
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.17em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: .83em;
+}
+
+h6 {
+  font-size: .67em;
+}
+
 .posts {
   list-style-type: none;
   margin-bottom: 2em;
@@ -235,3 +260,24 @@ blockquote:before {
 blockquote p {
   display: inline;
 }
+
+.footnotes {
+  font-size: small;
+  line-height: normal;
+}
+
+.footnotes p {
+  margin: 0.3em 0;
+}
+
+.footnotes li:target {
+  background: rgb(200,212,230);
+}
+
+a.footnote:before {   
+  content: "[";
+ }
+ 
+ a.footnote:after {
+     content: "]";
+ }

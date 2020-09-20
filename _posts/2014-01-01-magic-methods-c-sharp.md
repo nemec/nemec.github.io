@@ -177,7 +177,7 @@ public static class MyExtensions
 }
 ```
 
-[Further Reading](http://msmvps.com/blogs/jon_skeet/archive/2010/09/03/reimplementing-linq-to-objects-part-2-quot-where-quot.aspx)
+[Further Reading](https://codeblog.jonskeet.uk/2010/09/03/reimplementing-linq-to-objects-part-2-quot-where-quot/)
 
 await Anything
 --------------
@@ -233,4 +233,4 @@ public class Awaiter<T> : INotifyCompletion
 }
 ```
 
-[Further Reading](http://blogs.msdn.com/b/pfxteam/archive/2011/01/13/10115642.aspx)
+[Further Reading](https://devblogs.microsoft.com/pfxteam/await-anything/)
