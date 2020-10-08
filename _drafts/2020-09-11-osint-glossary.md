@@ -264,7 +264,24 @@ leads.
 * Cryptocurrency
 * Bitcoin
 * Dox/Doxing/Doxxing
-* Dark Web/Darknet
+
+
+## Dark Web / Darknet
+
+In reality it's still HTML + CSS + JS. You could think of tor as an "alternate internet" because .onion sites bypass much of the standard internet infrastructure.
+* Domain registration isn't controlled by ICANN or independent registrars. Instead, domains are created for free via mathematical proof
+* There are no IP addresses involved (in the tor layer)
+* It uses a novel kind of "DNS" (method for finding the .onion server you want to talk to) and "BGP" (moving messages between point A (your PC) and point B (the .onion server) in a secure way) that aren't compatible with their "clearnet" counterparts.
+IMO tor is only "special" because:
+* There's a barrier to entry for the average person (all OSes now come with a web browser by default, but not tor enabled)
+* Bypassing standard internet infrastructure offers less regulation and less ability for organizations like ICANN to take punitive measures for sites that break the law.
+But in the end, .onion sites are serving up web pages in a very similar way to normal websites, so they can look the exact same.
+
+Secondly, yes you can visit normal, non .onion websites over the tor network. Nothing special, right? However, that's only possible because of the existence of exit nodes. Exit nodes are really just another phrase for "proxy" - you make a request to the tor network, the exit node translates that into a regular webpage request (from their IP address instead of yours), then translates the webpage response back into the tor network so that your tor-enabled browser can read it.
+By analogy, think of it like phoning somebody up and telling them, "I want amazon.com". They download amazon.com into HTML files, put them on a flash drive, and mail you the flash drive. Plug that into your PC and you can open the HTML in your browser - bang! you've got a webpage. Obviously the tor network does this a lot faster than shipping physical mail and with a lot more detail, but it has many of the same qualities:
+* Amazon does not know that you were the one who requested the web page (assuming you're not logged in)
+* Your ISP doesn't know that you visited Amazon
+
 
 ## Deep Web
 
