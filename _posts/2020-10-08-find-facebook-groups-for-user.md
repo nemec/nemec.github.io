@@ -33,7 +33,7 @@ Open Postman, then click the **File** menu, then the **Import** option.
 ![Screenshot showing the File -> Import... menu in Postman to import a Postman collection](/images/2020/08/import-collection-menu.png)
 
 On the Import menu, click the **Link** tab and paste the following link:
-`https://www.postman.com/collections/e43f796b51d975126a39`. Then continue and
+`https://www.postman.com/collections/f3470ae065c34fb42a59`. Then continue and
 finish importing the collection.
 
 ![Screenshot showing the Link tab in the import dialog](/images/2020/08/import-collection-link.png)
