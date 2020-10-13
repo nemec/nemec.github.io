@@ -9,6 +9,16 @@ headerImage: 2020/08/fb-group-header.png
 #headerImageAttrib: image credit - bitninja.io
 ---
 
+## Warning
+
+FYI, I've had a report from someone else that this technique got their account
+temporarily locked. After changing their account password they were let back
+into their account. Facebook claimed their account had been phished, probably
+related to the extension the technique came from (see below). It happened to me,
+too, but only once - later I tried again and had no issues.
+
+So remember to be careful and only use sockpuppet accounts!
+
 ## Intro
 
 Howdy! Today's post is brought to you by a tip from
