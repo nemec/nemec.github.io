@@ -11,6 +11,7 @@ variables:
 
 ```python
 import pathlib
+import sqlite3
 
 db_file = pathlib.Path('/some/directory/file.db')
 with sqlite3.connect(str(db_file)) as conn:
