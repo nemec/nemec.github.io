@@ -261,6 +261,9 @@ leads.
 * Reverse Image Search
 * Revenge Porn / Non-consensual pornography (NCP) / Non-consensual Image Abuse (NCIA)
 * Phishing
+* Cryptography
+  * Asymmetric Cryptography
+  * Symmetric Cryptography
 * Cryptocurrency
 * Bitcoin
 * Dox/Doxing/Doxxing
@@ -281,6 +284,45 @@ Secondly, yes you can visit normal, non .onion websites over the tor network. No
 By analogy, think of it like phoning somebody up and telling them, "I want amazon.com". They download amazon.com into HTML files, put them on a flash drive, and mail you the flash drive. Plug that into your PC and you can open the HTML in your browser - bang! you've got a webpage. Obviously the tor network does this a lot faster than shipping physical mail and with a lot more detail, but it has many of the same qualities:
 * Amazon does not know that you were the one who requested the web page (assuming you're not logged in)
 * Your ISP doesn't know that you visited Amazon
+
+However, the security of tor goes even further than that. After all, your friend
+now knows about your acute interest in Barney memorabilia and he's in a great
+position to tell all of your other friends about your deepest secret. The next
+bit of security is known as "Onion Routing", which is an analogy to the many
+layers of an onion and it's used to hide a message in a way that the receiver
+doesn't know who the sender is. The way this works is that the tor network
+publishes a directory of nodes on the network - couriers, if you will.
+
+#TODO image of a chain of couriers
+
+Your
+tor-enabled browser chooses a route from the directory that passes between
+multiple couriers and, using [asymmetric cryptography](#asymmetric-cryptography),
+_encrypts_ the message using the encryption keys from each courier. It starts
+backwards on the route, first encrypting your message with the keys of the final
+destination. Then that encrypted message is encrypted again with the keys of
+the last courier in the chain, and _that_ output is encrypted again by the keys
+of the next courier. This continues repeatedly until the single message has been
+encrypted by the keys of every courier.
+
+#TODO image of encrypted layers
+
+Your message is now buried within multiple layers of encryption and only _one_
+courier has the ability to unlock each layer. You pass this message off to the
+first courier, who has the keys to unlock the first layer. Once that's done,
+only one other courier can unlock the next layer so they pass the message off
+to them. This, too, happens repeatedly until your message reaches the final
+destination and they unlock and read your message. Due to all of the layers,
+each courier only knows two identities - the person they _received_ the message
+from and the person they _gave_ the message to. With a long enough chain of
+couriers, there is no way for the person reading your unencrypted message to
+know it was you who sent it - a truly anonymous message.
+
+Keep in mind, this only works properly if you don't identify yourself _within_
+the message you've sent to the other party. Tor may be able to hide that you're
+accessing a website, but if you log in to that website, you're sending them
+directly your username and password - so in that case it's quite easy for
+the website to connect the dots and realize who you are.
 
 
 ## Deep Web
