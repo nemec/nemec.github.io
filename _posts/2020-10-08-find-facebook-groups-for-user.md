@@ -9,6 +9,8 @@ headerImage: 2020/08/fb-group-header.png
 #headerImageAttrib: image credit - bitninja.io
 ---
 
+Edited 2020-10-22 to add a step copying User Agent
+
 ## Warning
 
 FYI, I've had a report from someone else that this technique got their account
@@ -43,7 +45,7 @@ Open Postman, then click the **File** menu, then the **Import** option.
 ![Screenshot showing the File -> Import... menu in Postman to import a Postman collection](/images/2020/08/import-collection-menu.png)
 
 On the Import menu, click the **Link** tab and paste the following link:
-`https://www.postman.com/collections/f3470ae065c34fb42a59`. Then continue and
+`https://www.getpostman.com/collections/a7555b0c8ab2298cae48`. Then continue and
 finish importing the collection.
 
 ![Screenshot showing the Link tab in the import dialog](/images/2020/08/import-collection-link.png)
@@ -86,6 +88,21 @@ account, so don't share this Cookie with anyone else.
 
 ![Screenshot showing the section of Browser Dev Tools](/images/2020/08/copy-cookie.png)
 
+### User Agent
+
+[@OsintSupport](https://twitter.com/OsintSupport) on Twitter recently [informed me](https://twitter.com/OsintSupport/status/1318930792802848768)
+that the Cookies from Facebook are tied to a specific User Agent - this is the
+value that tells Facebook which browser (and version) you are running. This means
+we need to copy the User Agent from the same browser session you got the Cookies
+from.
+
+You can use the same Dev Tools window from the last step to get your User Agent.
+Look in the **Headers** section for **Request Headers** and find the **User-Agent**
+section. Copy the *entire* User Agent value (except the `User-Agent:` part)
+into another file for later use.
+
+![Screenshot showing the section of Browser Dev Tools](/images/2020/08/copy-user-agent.png)
+
 ### Additional Token
 
 The final bit of Facebook data we need is called the `fb_dtsg` token. I'm not
@@ -108,12 +125,17 @@ text within quotes.
 
 Back in Postman, select the **Headers** tab on the request. It will be
 pre-filled with some values and the section for "cookie" will be labeled
-"<insert_cookie_here>". Replace that text with the cookie value you copied from
+"`<insert_cookie_here>`". Replace that text with the cookie value you copied from
 Facebook.
 
 ![Postman UI with the Headers tab selected, showing where to put the cookie header](/images/2020/08/edit-cookie-header.png)
 
-Next, switch to the **Body** tab. Replace the value "<insert_dtsg_value_here>"
+Do the same with your User Agent value in the User-Agent section. Replace the
+"`<insert_user_agent_here>`" text with your User Agent.
+
+![Postman UI with the Headers tab selected, showing where to put the user agent header](/images/2020/08/edit-user-agent-header.png)
+
+Next, switch to the **Body** tab. Replace the value "`<insert_dtsg_value_here>`"
 with the dtsg text from Facebook and then in the "q" section, replace the ID
 number after "node(" with the ID of your target profile. If 5000 groups is too
 few (or too many) replace the number "5000" in the query section with a number
