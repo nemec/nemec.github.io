@@ -5,6 +5,7 @@ category: infosec
 tags:
   - infosec
   - osint
+  - facebook
 headerImage: 2020/08/fb-group-header.png
 #headerImageAttrib: image credit - bitninja.io
 ---
