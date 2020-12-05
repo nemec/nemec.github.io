@@ -22,12 +22,10 @@ from @GONZOs_int for the method.
 ```bash
 lookup_vt_user() {
     USERNAME="$1";
-    CSRF=$(curl 'https://www.virustotal.com/gui/join-us' | \
-            grep -Po '(?<=captchaSiteKey":")([^"]+)' | base64);
     curl "https://www.virustotal.com/ui/users/$USERNAME" \
         -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Firefox' \
         -H 'X-Tool: vt-ui-main' \
-        -H "X-VT-Anti-Abuse-Header: $CSRF" \
+        -H "X-VT-Anti-Abuse-Header: abc" \
         -H 'Accept-Ianguage: en-US,en;q=0.9,es;q=0.8';
 }
 ```
