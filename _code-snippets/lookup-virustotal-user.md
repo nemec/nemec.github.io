@@ -35,3 +35,27 @@ lookup_vt_user() {
 ```bash
 lookup_vt_user test
 ```
+
+### Output
+
+
+{:.ignore}
+```plaintext
+{
+    "data": {
+        "attributes": {
+            "first_name": "",
+            "last_name": "",
+            "profile_phrase": "",
+            "reputation": 1,
+            "status": "active",
+            "user_since": 1281919280
+        },
+        "id": "test",
+        "links": {
+            "self": "https://www.virustotal.com/ui/users/test"
+        },
+        "type": "user"
+    }
+}
+```
