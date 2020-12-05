@@ -14,6 +14,6 @@ variables:
 
 ---
 
-```bash
+```powershell
 runas /user:$userid cmd
 ```
