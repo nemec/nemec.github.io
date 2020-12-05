@@ -17,6 +17,8 @@ variables:
 h/t to [this tweet](https://twitter.com/GONZOs_int/status/1334811159724253184)
 from @GONZOs_int for the method.
 
+(Note: working as of 2020/12/04. May stop working at any time.)
+
 ```bash
 lookup_vt_user() {
     USERNAME="$1";
