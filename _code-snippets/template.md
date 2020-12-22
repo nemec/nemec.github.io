@@ -18,3 +18,8 @@ variables:
 ```bash
 chmod +x $FILENAME
 ```
+
+{:.ignore}
+```plaintext
+Ignore this when copying scripts
+```
