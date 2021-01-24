@@ -17,6 +17,7 @@ variables:
 ---
 
 ```python
+from typing import BinaryIO
 import hashlib
 
 # Can replace algorithm with hashlib.sha1, hashlib.sha256, etc.
