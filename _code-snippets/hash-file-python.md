@@ -27,6 +27,6 @@ def hash_file(f: BinaryIO, blocksize: int=8192, algorithm=hashlib.md5):
       file_hash.update(chunk)
     return file_hash.hexdigest()
 
-with open(filename, 'b') as f:
+with open(filename, 'rb') as f:
     print(hash_file(f))
 ```
