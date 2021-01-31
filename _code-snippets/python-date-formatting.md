@@ -16,15 +16,7 @@ variables:
 
 Source: <https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes>
 
-```python
-from datetime import datetime
-
-date = datetime.strptime('2020-01-10', '%Y-%m-%d')
-
-print(date.strftime('%b %d, %Y'))
-```
-
-Common formats:
+## Common formats:
 
 Format | Example | Note
 -------|---------|-------
@@ -32,7 +24,7 @@ Format | Example | Note
 %Y-%m-%d %H:%M:%S | 2021-01-31 02:09:22 |
 %Y-%m-%dT%H:%M:%SZ | 2021-01-31T02:09:22Z | ISO format on a UTC date
 
-Date format specifier reference:
+## Date format specifier reference:
 
 Directive | Meaning | Example
 ----------|---------|----------
@@ -63,3 +55,10 @@ Directive | Meaning | Example
 %G | ISO 8601 year with century representing the year that contains the greater part of the ISO week (%V). | 0001, 0002, …, 2013, 2014, …, 9998, 9999
 %u | ISO 8601 weekday as a decimal number where 1 is Monday. | 1, 2, …, 7
 %V | ISO 8601 week as a decimal number with Monday as the first day of the week. Week 01 is the week containing Jan 4. | 01, 02, …, 53
+
+
+```python
+from datetime import datetime
+date = datetime.strptime('2020-01-10', '%Y-%m-%d')
+print(date.strftime('%b %d, %Y'))
+```

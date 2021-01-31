@@ -281,3 +281,13 @@ a.footnote:before {
  a.footnote:after {
      content: "]";
  }
+
+
+ table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: bold;
+}
