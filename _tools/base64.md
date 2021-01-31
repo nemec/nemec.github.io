@@ -1,15 +1,15 @@
 ---
 layout: default
-published: false # REMOVE ME
 title: Base64 Deocding and Encoding
 description: Some description
 ---
 
-```bash
-chmod +x $FILENAME
-```
 
-{:.ignore}
-```plaintext
-Ignore this when copying scripts
-```
+<label for="b64-encoded">Base64 Encoded Text:</label>
+<textarea id="b64-encoded">
+</textarea>
+
+
+<label for="b64-decoded">Base64 Decoded Text:</label>
+<textarea id="b64-decoded">
+</textarea>
