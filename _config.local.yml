@@ -12,6 +12,9 @@ collections:
   code-snippets:
     output: true
     slug: "code-snippets"
+  tools:
+    output: true
+    slug: "tools"
 
 exclude:
   - "*.bak"

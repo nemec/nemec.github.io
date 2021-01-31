@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<div id="home">
+  <h1>Tools</h1>
+  <section>
+    <ul class="posts">
+      {% assign sorted = site.tools | sort: 'title' %}
+      {% for post in sorted %}
+      <li id="{{post.id | slugify }}"><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
