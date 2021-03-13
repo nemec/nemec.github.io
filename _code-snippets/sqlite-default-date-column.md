@@ -4,6 +4,7 @@ title: SQLite date column with default value
 description: How to create a date column with a default value in a SQLite database
 tags:
   - sqlite
+  - sql
 language: sqlite
 variables:
 ---
