@@ -2,7 +2,7 @@
 layout: post
 title: HiDPI Scaling for Electron-based Snap apps like Spotify
 description:
-category: infosec
+category: programming
 tags:
   - gnome
   - hidpi
