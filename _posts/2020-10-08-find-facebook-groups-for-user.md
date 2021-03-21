@@ -8,9 +8,9 @@ tags:
   - facebook
 headerImage: 2020/08/fb-group-header.png
 #headerImageAttrib: image credit - bitninja.io
+editNotes:
+  - Edited 2020-10-22 to add a step copying User Agent
 ---
-
-Edited 2020-10-22 to add a step copying User Agent
 
 ## Warning
 

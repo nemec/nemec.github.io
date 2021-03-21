@@ -9,6 +9,8 @@ tags:
   - entityframework
 headerImage: 2020/05/port-scan-header.png
 headerImageAttrib: image credit - bitninja.io
+#editNotes:
+#  - Edited 2021-01-01 for clarity
 ---
 
 
@@ -16,3 +18,5 @@ headerImageAttrib: image credit - bitninja.io
 * Save in batches
 * Refresh the context
 * AutoDetectChangesEnabled = false
+
+![alt text](/images/2020/05/some-image.png)

@@ -8,30 +8,48 @@ layout: default
 	{% assign author = site.data.authors['dan-nemec'] %}
 {% endif %}
 
-<h1>{{ page.title }}</h1>
-<h4>By {{ author.name }}</h4>
-<p class="meta">{{ page.date | date_to_string }}</p>
+<article itemscope itemtype="http://schema.org/BlogPosting">
+<header>
+<h1 itemprop="name">{{ page.title }}</h1>
+<h4>By <a rel="author">{{ author.name }}</a></h4>
+<p class="meta">
+	<time class="post-date" itemprop="datePublished" pubdate datetime="{{ page.date | date: '%Y-%d-%m' }}">{{ page.date | date_to_string }}</time>
+</p>
 
 
 {% if page.headerImage %}
-<div class="header-image">
+<figure class="header-image">
 	<img src="{{ site.url }}/images/{{ page.headerImage }}" alt="Post header image"/>
 	{% if page.headerImageAttrib %}
-	<span class="attribution">{{ page.headerImageAttrib }}</span>
+	<span class="attribution">
+		<cite>{{ page.headerImageAttrib }}</cite>
+	</span>
 	{% endif %}
-</div>
+</figure>
 {% endif %}
 
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-{{ content }}
-</article>
+{% if page.editNotes %}
+<ul class="edit-notes">
+	{% for editNote in page.editNotes %}
+	<li>{{ editNote }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+</header>
 
+<div class="post">
+{{ content }}
+</div>
+
+<footer>
 <div class="share">  
-  {% if page.shortlink != null %}
-  <input type="text" name="shortlink" id="shortlink" onclick="this.select()" readonly
-    value="{{ page.shortlink }}" />
-  {% endif %}
+{% if page.shortlink != null %}
+<input type="text" name="shortlink" id="shortlink" onclick="this.select()" readonly
+	value="{{ page.shortlink }}" />
+{% endif %}
 </div>
 
 <script type="text/javascript" src="/js/lightbox.js"></script>
 <link rel="stylesheet" href="/css/lightbox.css">
+</footer>
+</article>
