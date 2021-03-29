@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ebay is port scanning visitors to their website - and they aren't the only ones
+title: eBay is port scanning visitors to their website - and they aren't the only ones
 description: Websites are scanning for open ports on your PC to help fight fraud,
              but this data also flows into a massive, global tracking database.
 category: infosec
@@ -9,12 +9,14 @@ tags:
   - osint
 headerImage: 2020/05/port-scan-header.png
 headerImageAttrib: image credit - bitninja.io
+editNotes:
+  - Edited 2021-03-28 to correct capitalization of eBay
 ---
 
-There's a story going around the internet about Ebay port scanning its visitors
+There's a story going around the internet about eBay port scanning its visitors
 without any permission or even indication that it's happening (without digging
 into the browser's developer tools) - it's absolutely true. But why are they
-doing it, and what is Ebay doing with the data it collects? I took a peek into
+doing it, and what is eBay doing with the data it collects? I took a peek into
 the code to find out (adapted from [this thread](https://twitter.com/djnemec/status/1264523835044442113)),
 and I'm sure what I found is only a small part of the full story.
 
@@ -59,20 +61,20 @@ but it's more of a guideline than a hard and fast rule), it's possible to also
 infer some programs that a user _may_ be running on their network depending on
 whether the port is open or not.
 
-## What Ebay's doing 
+## What eBay's doing 
 
-As noted in NullSweep's article, Ebay is scanning only the user's local PC,
+As noted in NullSweep's article, eBay is scanning only the user's local PC,
 IP address 127.0.0.1, and looking for a small selection of ports commonly used
 by remote desktop software. Interestingly, Charlie tried installing one of those
-applications and didn't notice anything different about how Ebay behaved, so
+applications and didn't notice anything different about how eBay behaved, so
 what _are_ they doing with it? I decided to load the site and find out.
 
 ## Digging into the code
 
 It was at about this time that I found a [Twitter post](https://twitter.com/JackRhysider/status/1264415919691841536)
 from Jack Rhysider, host of the Darknet Diaries podcast, on the same topic.
-He theorized a number of reasons why Ebay might be doing this, and it piqued my
-interest even further. In trying to load Ebay locally I found that I couldn't
+He theorized a number of reasons why eBay might be doing this, and it piqued my
+interest even further. In trying to load eBay locally I found that I couldn't
 replicate the behavior in Linux even after spoofing a Windows User Agent and
 disabling all of my extensions. There must be some check hidden in the Javascript,
 but as of yet I haven't found one. After that, I loaded a Windows VM, installed
@@ -123,7 +125,7 @@ lengths to hide tracking and scanning data from its customers.
 [![Joined Javascript blob](/images/2020/05/blob-string-join-2.png)](/images/2020/05/blob-string-join-2.png)
 
 Further on in the code you can see evidence that yes, this is a dedicated port
-scanner and not some other (debatably) legitimate reason for Ebay to be accessing a
+scanner and not some other (debatably) legitimate reason for eBay to be accessing a
 service on localhost (yes, there are cool things you can do with local web
 servers, but usually you just see it in the news when
 [something goes wrong](https://www.zdnet.com/article/zoom-defends-use-of-local-web-server-on-macs-after-security-report/)).
@@ -158,7 +160,7 @@ The URL to this PNG isn't returning an image - it's returning nothing at all!
 [![PNG response with 204 code](/images/2020/05/clear-png-response.png)](/images/2020/05/clear-png-response.png)
 
 If this specific scan was being used for fraud detection, I would have expected
-that Ebay would receive some sort of fraud score in response to this request,
+that eBay would receive some sort of fraud score in response to this request,
 but it seems the data is simply being tossed to the mother ship for later use.
 Or maybe they're taking a cue from [this Russian hacker group](https://www.zdnet.com/article/russian-hacker-group-using-http-status-codes-to-control-malware-implants/),
 which uses HTTP status codes as the control protocol itself (just kidding).
@@ -227,10 +229,10 @@ def decrypt(encr, key):
 
 With a tool for decrypting the exfiltrated data, I set about checking how much
 data was being sent out to the `src.ebay-us.com` domain. There were seven images
-in all for one load of the Ebay sign in page, and all of them sent different
+in all for one load of the eBay sign in page, and all of them sent different
 data.
 
-[![List of seven bits of data sent to Ebay domain](/images/2020/05/clear-list.png)](/images/2020/05/clear-list.png)
+[![List of seven bits of data sent to eBay domain](/images/2020/05/clear-list.png)](/images/2020/05/clear-list.png)
 
 The data included some personal bits (EU readers may want to check whether they're
 affected and whether or not it adheres to GDPR regulations)
@@ -244,16 +246,16 @@ affected and whether or not it adheres to GDPR regulations)
 
 To summarize what we've found so far:
 
-* Ebay collects data on whether certain ports are open on your local PC
-* This data is shipped to an Ebay domain, but does not seem to be used otherwise
+* eBay collects data on whether certain ports are open on your local PC
+* This data is shipped to an eBay domain, but does not seem to be used otherwise
 * Additional data like User Agent and IP are also sent
 
-If Ebay isn't using it to decide whether you should be allowed to log in right
+If eBay isn't using it to decide whether you should be allowed to log in right
 there, what _is_ it doing with the data? At this point, I'd stayed up late
 and was pretty tired, so I totally missed one hugely suspicious indicator - 
 the domain where data is exfiltrated is _not_ a subdomain of `ebay.com` - it's
 `ebay-us.com`. Still, a quick check shows that it's owned by somebody at
-Ebay, so at the very least it isn't phishing malware. Twitter user Armchair IR
+eBay, so at the very least it isn't phishing malware. Twitter user Armchair IR
 [pointed out](https://twitter.com/__T_X_8/status/1264579224372785152) that similar
 behavior has been seen by Facebook and it traced to a company called ThreatMetrix,
 an identity tracking/anti-fraud company. Checking the
@@ -268,7 +270,7 @@ not the correct terminology lol) the domain through one of their own that isn't
 associated with ThreatMetrix.
 
 The earliest record at crt.sh for this domain dates back all the way
-[to 2013](https://crt.sh/?id=2133460), so it's possible that Ebay has been
+[to 2013](https://crt.sh/?id=2133460), so it's possible that eBay has been
 scanning customers' computers for almost seven years without too many people
 noticing. `online-metrix.net` uses wildcard certificates, so unfortunately
 it's not so easy to enumerate their clients, but there is room for further
@@ -311,9 +313,9 @@ they attempt to de-anonymize people using people using VPNs.
 spoofing, proxies, VPNs, Tor browsers and changes in behavior patterns, such as
 unusual transaction volumes.
 
-It's not just Ebay scanning your ports, there is allegedly a network of 30,000
+It's not just eBay scanning your ports, there is allegedly a network of 30,000
 websites out there all working for the common aim of harvesting open ports,
 collecting IP addresses, and User Agents in an attempt to track users all across
-the web. And this isn't some rogue team within Ebay setting out to skirt the law,
+the web. And this isn't some rogue team within eBay setting out to skirt the law,
 you can bet that LexisNexis lawyers have thoroughly covered their bases when
 extending this service to their customers (at least in the U.S.).
