@@ -58,4 +58,10 @@ to
 Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/spotify_spotify.desktop /snap/bin/spotify --force-device-scale-factor=2 %U
 ```
 
+You may need to run the following command for the changes to be recognized:
+
+```bash
+sudo update-desktop-database
+```
+
 Restart Spotify and the UI is now scaled 200%, like the rest of my UI.
