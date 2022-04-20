@@ -55,6 +55,9 @@ http://www.lex-informatica.org/2%20Ensuring%20the%20Legality%20of%20the%20Digita
 https://www.americanbar.org/groups/litigation/committees/trial-evidence/practice/2018/new-rules-electronic-evidence/
 
 
+Metadata (internal [exif] and external [file created/modified])
+
+
 ----------------------------------------------
 
 Secure hashing is a complicated beast. 
