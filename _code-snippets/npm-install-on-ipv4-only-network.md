@@ -25,9 +25,27 @@ and we can revert back to the previous behavior by adding a new CLI argument.
 Since npm does not offer a way to natively override its node parameters (afaik),
 we can create an alias that starts node and then calls npm with the argument enabled.
 
+There are two options you can follow. The first is to update your `.nmprc` file and
+the second is to replace your `npm` command with an alias that includes the argument.
+Note that both options override all uses of NPM. If you use NVM to manage multiple
+versions of Node.js these commands will crash if you use a very old version of
+Node (e.g. v12). With this particular issue you can just comment out the change
+and NPM will work again, since it only occurs in recent versions of NPM.
+
+### NPM rc
+
+Run the following code snippet to install the override in your `.npmrc`.
+
+```bash
+echo "node-options=--max_old_space_size=4096" >> ~/.npmrc
+```
+
+### NPM Alias
+
 Run the following code snippet to install the alias into your bashrc file. If
 you aren't using Bash, change this to your zshrc or equivalent for your shell.
 
+{:.ignore}
 ```bash
 echo "alias npm='node --dns-result-order=ipv4first /usr/bin/npm'" >> ~/.bashrc
 ```
