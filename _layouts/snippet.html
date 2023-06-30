@@ -43,6 +43,7 @@ custom_js_top:
         {% endfor %}
         data-language="{{ page.language }}"
         data-replace="{% if var[1].replace %}{{ var[1].replace }}{% else %}{{ var[0] }}{% endif %}"
+        placeholder="{{ var[1].placeholder }}"
         id="{{ var[0] }}" />
     </div>
     {% endfor %}
