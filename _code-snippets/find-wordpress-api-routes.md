@@ -6,6 +6,7 @@ description: Quick script to print out all the routes without
 tags:
   - bash
   - linux
+  - wordpress
 language: bash
 variables:
   $BASE_URL:
@@ -18,9 +19,4 @@ variables:
 
 ```bash
 curl '$BASE_URL/wp-json/' | jq -r '.routes | keys[]'
-```
-
-{:.ignore}
-```plaintext
-Ignore this when copying scripts
 ```
