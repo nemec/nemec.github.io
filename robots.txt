@@ -1,1 +1,4 @@
 Sitemap: https://blog.nem.ec/sitemap.xml
+
+User-agent: GPTBot
+Disallow: /
