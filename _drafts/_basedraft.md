@@ -2,6 +2,7 @@
 layout: post
 title: Tips for bulk inserts in Entity Framework
 description: Some description
+# categories can be found in _data/categories.yml
 category: infosec
 tags:
   - dotnet
