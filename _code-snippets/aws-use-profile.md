@@ -51,19 +51,19 @@ Add shell tab completion:
 ```bash
 _use_aws_profile_completions()
 {
- 	COMPREPLY=()
- 	cur="${COMP_WORDS[COMP_CWORD]}"
- 	prev="${COMP_WORDS[COMP_CWORD-1]}"
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
     opts="$(list-aws-profiles | tr '\n' ' ')"
  
- 	if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
- 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
- 		return 0
- 	fi
+    if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
+       COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+       return 0
+    fi
  
- 	case "${prev}" in
- 		# ...
- 	esac
+    case "${prev}" in
+        # ...
+    esac
 }
 
 complete -F _use_aws_profile_completions use-aws-profile
